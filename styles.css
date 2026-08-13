@@ -1,0 +1,669 @@
+/* ==========================================================================
+   1. ESTILOS GENERALES Y RESETS (Compartidos por ambas pantallas)
+   ========================================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-color: #121e16; /* Entorno externo oscuro premium */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* ==========================================================================
+   2. PANTALLA PRINCIPAL: SECTORES (9 Opciones en Vertical)
+   ========================================================================== */
+
+/* Contenedor del Smartphone de Sectores */
+.phone-container {
+    width: 100%;
+    max-width: 430px;
+    height: 92vh;
+    max-height: 900px;
+    background-color: #e5ede8; /* Fondo verde pálido orgánico */
+    border-radius: 40px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Encabezado Fijo Superior con Textura */
+.app-header {
+    background-image: url('sectores_generales/general.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 30px 16px 20px 16px;
+    position: relative;
+    text-align: center;
+    color: #ffffff;
+    border-bottom-left-radius: 28px;
+    border-bottom-right-radius: 28px;
+    box-shadow: 0 6px 20px rgba(21, 56, 38, 0.15);
+    z-index: 10;
+}
+
+.app-header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(135deg, rgba(27, 50, 34, 0.9) 0%, rgba(48, 87, 59, 0.78) 100%);
+    z-index: 1;
+}
+
+.logo-icon, .app-header h1, .app-header h2 {
+    position: relative;
+    z-index: 2;
+}
+
+.logo-icon {
+    font-size: 1.4rem;
+    color: #cdb387; /* Detalle dorado/bellota */
+    margin-bottom: 6px;
+}
+
+.app-header h1 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.app-header h2 {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #cbdad0;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 4px;
+}
+
+/* Área de desplazamiento de tarjetas */
+.sectors-scroll-area {
+    flex: 1;
+    overflow-y: scroll;
+    padding: 20px 16px 100px 16px; /* Espacio para que la barra inferior no tape el contenido */
+}
+.sectors-scroll-area::-webkit-scrollbar { display: none; }
+
+/* Contenedor en Lista de Una Sola Columna Vertical */
+.sectors-vertical-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px; /* Separación limpia entre tarjetas */
+}
+
+/* Tarjetas individuales de los Sectores */
+.sector-card {
+    position: relative;
+    height: 140px; /* Altura rectangular premium */
+    border-radius: 24px;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(21, 56, 38, 0.04);
+}
+
+/* Sombreado interno para contraste del texto */
+.card-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(to top, rgba(18, 30, 22, 0.8) 0%, rgba(0,0,0,0.05) 80%);
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between; /* Texto a la izquierda, botón a la derecha */
+    align-items: center; /* Alineados perfectamente al centro vertical */
+}
+
+.card-overlay h3 {
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    max-width: 60%; /* Evita que el texto largo se choque con el botón */
+    text-align: left;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Botón Ovalado de Alta Gama */
+.btn-ingresar {
+    background-color: #ded9cd; /* Tono arena matte de la interfaz anterior */
+    color: #2a261f;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 16px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: inset 0 -2px 0px rgba(0,0,0,0.1), 0 4px 10px rgba(0,0,0,0.15);
+    transition: transform 0.1s;
+    white-space: nowrap; /* Evita que la palabra se parta */
+}
+
+.btn-ingresar:active {
+    transform: scale(0.95);
+    background-color: #cbd5cc;
+}
+
+/* Barra de navegación inferior Menú Sectores */
+.bottom-nav {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 75px;
+    z-index: 90;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bottom-nav .nav-blur-bg {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(35, 59, 44, 0.88);
+    backdrop-filter: blur(12px);
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
+}
+
+.bottom-nav .nav-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.bottom-nav .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #a4bfae;
+    font-size: 1.15rem;
+}
+.bottom-nav .nav-item span { font-size: 0.58rem; font-weight: 700; margin-top: 2px; }
+.bottom-nav .nav-item.active { color: #e5ede8; }
+
+
+/* ==========================================================================
+   3. PANTALLA DETALLE: AVENIDA DE LOS ROBLES (Carrusel e Info)
+   ========================================================================== */
+
+/* Teléfono Inteligente Encapsulado de Robles */
+.app-container {
+    width: 100%;
+    max-width: 430px;
+    height: 92vh;
+    max-height: 900px;
+    background-color: #e5ede8; /* Fondo verde pálido orgánico */
+    border-radius: 40px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Botón de Regreso Flotante */
+.floating-back-btn {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    width: 42px;
+    height: 42px;
+    background-color: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(8px);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #1e3a27;
+    text-decoration: none;
+    z-index: 99;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    font-size: 1rem;
+}
+
+/* Header con textura de corteza */
+.hero-banner {
+    background-image: url('sectores_generales/general.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 35px 24px 24px 24px;
+    position: relative;
+    color: #ffffff;
+    border-bottom-left-radius: 28px;
+    border-bottom-right-radius: 28px;
+}
+
+.hero-banner::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(135deg, rgba(27, 50, 34, 0.85) 0%, rgba(48, 87, 59, 0.7) 100%);
+    z-index: 1;
+}
+
+.meta-tag {
+    position: relative;
+    z-index: 2;
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    color: #cbdad0;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 4px 10px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-bottom: 12px;
+}
+
+.main-title {
+    position: relative;
+    z-index: 2;
+    font-size: 1.85rem;
+    font-weight: 700;
+}
+
+.scientific-name {
+    position: relative;
+    z-index: 2;
+    font-size: 0.9rem;
+    color: #d8c29d;
+    font-style: italic;
+}
+
+.acorn-badge {
+    position: absolute;
+    right: 24px;
+    bottom: -20px;
+    width: 50px;
+    height: 50px;
+    background-color: #cdb387;
+    border: 3px solid #e5ede8;
+    border-radius: 50%;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #23432d;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* Área de Contenido Scrollable Robles */
+.app-body {
+    flex: 1;
+    overflow-y: scroll;
+    padding: 32px 0px 100px 0px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+.app-body::-webkit-scrollbar { display: none; }
+
+/* Contenedor e iframe 360° */
+.card-info {
+    background-color: #ffffff;
+    border-radius: 24px;
+    padding: 20px;
+    margin: 0 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.02);
+}
+
+.card-info h3 {
+    font-size: 1.1rem;
+    color: #1a3b25;
+    margin-bottom: 12px;
+}
+
+.panorama-container {
+    width: 100%;
+    height: 160px;
+    background-color: #f4f7f5;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.panorama-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    color: #7a9382;
+    font-size: 0.85rem;
+    text-align: center;
+    padding: 10px;
+}
+
+.panorama-placeholder i {
+    font-size: 1.8rem;
+    color: #cdb387;
+}
+
+/* --- SECCIÓN DE CARRUSEL HORIZONTAL --- */
+.carousel-section h3 {
+    font-size: 1.1rem;
+    color: #1a3b25;
+    margin-left: 20px;
+    margin-bottom: 12px;
+}
+.carousel-section h3 span {
+    font-size: 0.75rem;
+    color: #7a9382;
+    font-weight: 400;
+}
+
+.species-carousel {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    padding: 4px 20px 16px 20px;
+    scroll-snap-type: x mandatory;
+}
+.species-carousel::-webkit-scrollbar { display: none; }
+
+.species-card {
+    min-width: 150px;
+    max-width: 150px;
+    background-color: #ffffff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(21, 56, 38, 0.04);
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-img {
+    width: 100%;
+    height: 110px;
+    background-size: cover;
+    background-position: center;
+}
+
+.card-detail {
+    padding: 12px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 4px;
+}
+
+.card-detail h4 {
+    font-size: 0.9rem;
+    color: #1a3b25;
+    font-weight: 700;
+}
+
+.card-detail .sci-name {
+    font-size: 0.75rem;
+    font-style: italic;
+    color: #7a9382;
+}
+
+.btn-ficha {
+    margin-top: 6px;
+    font-size: 0.7rem;
+    color: #ffffff;
+    background-color: #3b5f47;
+    text-decoration: none;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+/* Grid de Módulos de Madera/Métricas */
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 0 20px;
+}
+
+.metric-box {
+    background: #ded9cd;
+    border-radius: 18px;
+    padding: 12px 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: inset 0 -3px 0px rgba(0,0,0,0.1), 0 4px 10px rgba(0,0,0,0.04);
+}
+
+.metric-label {
+    font-size: 0.62rem;
+    font-weight: 800;
+    color: #5d5649;
+    margin-bottom: 6px;
+}
+
+.metric-icon-wrapper {
+    font-size: 1.3rem;
+    color: #433d32;
+    margin-bottom: 4px;
+}
+
+.metric-value {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #2a261f;
+}
+.status-low { color: #2d5a27; }
+
+/* Barra Inferior de Navegación Robles */
+.app-bottom-nav {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 75px;
+    z-index: 90;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.app-bottom-nav .nav-blur-bg {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(35, 59, 44, 0.85);
+    backdrop-filter: blur(12px);
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
+}
+
+.app-bottom-nav .nav-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.nav-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #a4bfae;
+    font-size: 1.15rem;
+}
+.nav-link span { font-size: 0.58rem; font-weight: 700; margin-top: 2px; }
+.nav-link.active { color: #e5ede8; }
+
+
+/* ==========================================================================
+   4. ELEMENTOS COMPARTIDOS ENTRE AMBAS BARRAS INFERIORES
+   ========================================================================== */
+.center-compass {
+    width: 68px;
+    height: 68px;
+    background: #e5ede8;
+    border-radius: 50%;
+    margin-top: -38px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.15);
+}
+
+.compass-inner {
+    width: 54px;
+    height: 54px;
+    background: linear-gradient(135deg, #2d5138 0%, #152c1e 100%);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #cdb387;
+    font-size: 1.3rem;
+}
+
+/* Estilos específicos e indispensables para el visor flotante 360 de Pannellum */
+        #visor360 {
+            display: none;
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.85);
+            z-index: 999;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        #panorama {
+            width: 100%;
+            height: 70%;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        #cerrar {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1000;
+            background: rgba(0,0,0,0.5);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+        }
+
+        .card-info img {
+    width: 100%;          /* Ocupa el 100% del ancho de la tarjeta */
+    height: auto;         /* Ajusta la altura automáticamente para no deformar */
+    display: block;       /* Elimina espacios en blanco extra debajo de la imagen */
+    border-radius: 12px;  /* Opcional: le da esquinas redondeadas para que combine con el diseño de la app */
+    margin-top: 10px;     /* Opcional: separa el mapa del título "Mapa" */
+}
+
+/* Contenedor del mapa para evitar que se rompa el diseño de la app al agrandarse */
+.mapa-container {
+    width: 100%;
+    overflow: hidden; /* O usa 'auto' si prefieres que aparezcan barras de scroll al hacer zoom */
+    border-radius: 12px;
+    margin-top: 10px;
+    background-color: #f5f5f5;
+}
+
+/* Estado normal de la imagen */
+.mapa-zoom {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease; /* Animación suave del zoom */
+    cursor: zoom-in;
+}
+
+/* Estado cuando se activa el Zoom (al tocar) */
+.mapa-zoom.active {
+    transform: scale(1.8); /* Magnitud del zoom (1.8 veces su tamaño). Puedes subirlo a 2.0 si quieres más zoom */
+    cursor: zoom-out;
+}
+/* Contenedor principal de la vista previa 360° */
+.panorama-placeholder {
+    /* Combinación de degradado oscuro + imagen de fondo */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)), url('faini.jpg.jpg');
+    background-size: cover;
+    background-position: center;
+    
+    /* Estilos de caja recomendados para que luzca como tarjeta en la app */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    border-radius: 12px;
+    min-height: 180px; /* Altura mínima base para que luzca bien el fondo */
+}
+
+/* Ícono central */
+.panorama-placeholder .icon-360 {
+    color: #ffffff;
+    font-size: 1.5rem; /* Ajusta el tamaño del ícono si lo deseas */
+    margin-bottom: 8px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+/* Título (Lago Botánico) */
+.panorama-placeholder .panorama-title {
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 4px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Descripción inferior */
+.panorama-placeholder .panorama-description {
+    color: #e5ede8;
+    font-size: 0.75rem;
+    margin: 0;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    max-width: 85%; /* Evita que el texto toque los bordes laterales */
+}
+#botonMovimiento {
+    position: absolute;
+    z-index: 9999;
+
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    border: none;
+    border-radius: 30px;
+
+    padding: 14px 22px;
+
+    background: rgba(0, 0, 0, 0.75);
+    color: white;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+#botonMovimiento.activo {
+    background: rgba(30, 120, 80, 0.9);
+}
