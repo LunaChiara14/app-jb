@@ -3,206 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Avenida de las Palmeras</title>
+    <title>Jardín Botánico - Sectores</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.7/build/pannellum.css">
-    <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.7/build/pannellum.js"></script>
-    <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 </head>
-<body>
-    <div class="app-container">
-        
-        <a href="index.html" class="floating-back-btn">
-            <i class="fa-solid fa-arrow-left"></i>
-        </a>
 
-        <div class="hero-banner" style="background-image: url('sectores_generales/general.jpg');">
-            <span class="meta-tag">SECTOR BOTÁNICO</span>
-            <h1 class="main-title">Avenida de las Palmeras</h1>
-            <p class="scientific-name">Arecaceae Area</p>
-            <div class="acorn-badge">
-                <iconify-icon icon="mdi:palm-tree"></iconify-icon>
+        <body>
+            <div class="app-container">
+            <div class="app-header">
+                <div class="logo-icon"><i class="fa-solid fa-leaf"></i></div>
+                <h1>Jardín Botánico</h1>
+                <h2>Sectores</h2>
+            </div>
+
+        <div class="sectors-scroll-area" id="scrollContainer">
+            <div class="sectors-vertical-list">
+                <div class="sector-card" style="background-image: url('sectores_generales/Robles.jpg');">
+                    <div class="card-overlay">
+                        <h3>Avenida de los Robles</h3>
+                        <a href="robles.html" class="btn-ingresar">Ingresar</a>
+                    </div>
+                </div>
+
+                <div class="sector-card" style="background-image: url('sectores_generales/fitogeograficas.jpg');">
+                    <div class="card-overlay">
+                        <h3>Regiones Fitogeográficas</h3>
+                        <a href="fitogeograficas.html" class="btn-ingresar">Ingresar</a>
+                    </div>
+                </div>
+
+                <div class="sector-card" style="background-image: url('sectores_generales/gimnospermas.JPG');">
+                    <div class="card-overlay">
+                        <h3>Gimnospermas</h3>
+                        <a href="gimnospermas.html" class="btn-ingresar">Ingresar</a>
+                    </div>
+                </div>
+
+                <div class="sector-card" style="background-image: url('sectores_generales/palmeras.jpg');">
+                    <div class="card-overlay">
+                        <h3>Avenida de las Palmeras</h3>
+                        <a href="palmeras.html" class="btn-ingresar">Ingresar</a>
+                    </div>
+                </div>
+
+                <div class="sector-card" style="background-image: url('sectores_generales/gramineas.JPG');">
+                    <div class="card-overlay">
+                        <h3>Jardín de Gramíneas</h3>
+                        <a href="jardin.html" class="btn-ingresar">Ingresar</a>
+                    </div>
+                </div>
+
+                <div class="sector-card" style="background-image: url('sectores_generales/Estanque.jpg');">
+                    <div class="card-overlay">
+                        <h3>Estanque</h3>
+                        <a href="estanque.html" class="btn-ingresar">Ingresar</a>
+                    </div>
+                </div>
+
+                <div class="sector-card" style="background-image: url('sectores_generales/cactus.jpg');">
+                    <div class="card-overlay">
+                        <h3>Cactus, Crasas y Orquídeas</h3>
+                        <a href="cactario.html" class="btn-ingresar">Ingresar</a>
+                    </div>
+                </div>
+
+                <div class="sector-card" style="background-image: url('sectores_generales/visitantes.jpg');">
+                    <div class="card-overlay">
+                        <h3>Alrededores Centro de Visitantes</h3>
+                        <a href="visitantes.html" class="btn-ingresar">Ingresar</a>
+                    </div>
+                </div>
+
+                <div class="sector-card" style="background-image: url('sectores_generales/mariposas.jpg');">
+                    <div class="card-overlay">
+                        <h3>Sendero de mariposas</h3>
+                        <a href="mariposas.html" class="btn-ingresar">Ingresar</a>
+                    </div>
+                </div>
+
+                    <div class="sector-card" style="background-image: url('sectores_generales/Rodofialas.jpg');">
+                    <div class="card-overlay">
+                        <h3>Rodofialas</h3>
+                        <a href="rodofialas.html" class="btn-ingresar">Ingresar</a>
+                    </div>
+                </div>
+
             </div>
         </div>
 
-        <div class="app-body">
-
-            <div class="card-info">
-                <h3>Visita Virtual</h3>
-                <div class="panorama-container" onclick="abrirTour('360prueba.jpg')" style="cursor: pointer;">
-                </div>
-            </div>
-
-            <div class="carousel-section">
-                <h3>Especies del Sector <span>(Desliza <i class="fa-solid fa-arrow-right"></i>)</span></h3>
-                
-                <div class="species-carousel">
-
-                    <div class="species-card">
-                        <div class="card-img" style="background-image: url('imagenes/planta1.jpg');"></div>
-                        <div class="card-detail">
-                            <h4>Palma blanca</h4>
-                            <span class="sci-name">Butia yatay</span>
-                            <a href="https://colocar-enlace-aqui.com" target="_blank" class="btn-ficha">Ficha</a>
-                        </div>
-                    </div>
-
-                    <div class="species-card">
-                        <div class="card-img" style="background-image: url('imagenes/planta2.jpg');"></div>
-                        <div class="card-detail">
-                            <h4>Pindó</h4>
-                            <span class="sci-name">Syagrus romanzoffiana</span>
-                            <a href="https://colocar-enlace-aqui.com" target="_blank" class="btn-ficha">Ficha</a>
-                        </div>
-                    </div>
-
-                    <div class="species-card">
-                        <div class="card-img" style="background-image: url('imagenes/planta3.jpg');"></div>
-                        <div class="card-detail">
-                            <h4>Palma blanca</h4>
-                            <span class="sci-name">Copernicia alba</span>
-                            <a href="https://colocar-enlace-aqui.com" target="_blank" class="btn-ficha">Ficha</a>
-                        </div>
-                    </div>
-
-                    <div class="species-card">
-                        <div class="card-img" style="background-image: url('imagenes/planta4.jpg');"></div>
-                        <div class="card-detail">
-                            <h4>Caranday</h4>
-                            <span class="sci-name">Trithrinax campestris</span>
-                            <a href="https://colocar-enlace-aqui.com" target="_blank" class="btn-ficha">Ficha</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        <section class="metrics-grid">
-                <div class="metric-box">
-                    <span class="metric-label">DURACIÓN</span>
-                    <div class="metric-icon-wrapper"><i class="fa-solid fa-clock-rotate-left"></i></div>
-                    <span class="metric-value">10 min</span>
-                </div>
-                <div class="metric-box">
-                    <span class="metric-label">DISTANCIA</span>
-                    <div class="metric-icon-wrapper"><i class="fa-solid fa-route"></i></div>
-                    <span class="metric-value">150 mts</span>
-                </div>
-                <div class="metric-box">
-                    <span class="metric-label">ESTACIÓN</span>
-                    <div class="metric-icon-wrapper"><i class="fa-solid fa-sun"></i></div>
-                    <span class="metric-value">Primavera</span>
-                </div>
-            </section>
         <nav class="bottom-nav">
             <div class="nav-blur-bg"></div>
             <div class="nav-content">
-            <a href="mapa.html" class="nav-item">
-                <i class="fa-solid fa-map-location-dot"></i>
-            <span>MAPA</span>
-            </a>
-        
-            <div class="center-compass">
-            <div class="compass-inner">
-                <i class="fa-solid fa-compass"></i>
-            </div>
-            </div>
-            <a href="index.html" class="nav-item active">
-            <i class="fa-solid fa-seedling"></i>
-            <span>SECTORES</span>
-            </a>
+                <a href="mapa.html" class="nav-item">
+                    <i class="fa-solid fa-map-location-dot"></i>
+                    <span>MAPA</span>
+                </a>
+            
+                <div class="center-compass">
+                    <div class="compass-inner">
+                        <i class="fa-solid fa-compass"></i>
+                    </div>
+                </div>
+                
+                <a href="index.html" class="nav-item active">
+                    <i class="fa-solid fa-seedling"></i>
+                    <span>SECTORES</span>
+                </a>
             </div>
         </nav>
-
-        <div id="visor360">
-            <span id="cerrar" onclick="cerrarTour()">✖</span>
-            <div id="panorama"></div>
-        </div>
-
     </div>
+
     <script>
-    let visor;
+        (function() {
+            const savedScroll = sessionStorage.getItem('botanicoScrollPos');
+            
+            // Restauramos el scroll lo antes posible apenas el contenedor esté listo
+            window.addEventListener('load', () => {
+                const scrollContainer = document.getElementById('scrollContainer');
+                if (scrollContainer && savedScroll) {
+                    scrollContainer.style.scrollBehavior = 'auto'; // Desactiva animaciones para evitar saltos visuales
+                    scrollContainer.scrollTop = parseInt(savedScroll, 10);
+                }
+            });
 
-    function abrirTour(imagen360) {
-
-        document.getElementById("visor360").style.display = "flex";
-
-        visor = pannellum.viewer("panorama", {
-            type: "equirectangular",
-            panorama: imagen360,
-            autoLoad: true,
-            compass: true,
-            showZoomCtrl: true,
-            orientationOnByDefault: false
-        });
-
-        visor.on("load", function () {
-
-            // Crear botón
-            const boton = document.createElement("button");
-
-            boton.id = "botonMovimiento";
-            boton.innerHTML = "📱 Mover con el celular";
-
-            boton.onclick = async function () {
-
-                // Algunos navegadores requieren permiso
-                if (
-                    typeof DeviceOrientationEvent !== "undefined" &&
-                    typeof DeviceOrientationEvent.requestPermission === "function"
-                ) {
-                    try {
-                        const permiso =
-                            await DeviceOrientationEvent.requestPermission();
-
-                        if (permiso !== "granted") {
-                            alert("Tenés que permitir el acceso al movimiento del dispositivo.");
-                            return;
-                        }
-
-                    } catch (error) {
-                        console.error(error);
-                        alert("No se pudo acceder al sensor.");
-                        return;
+            // Guardamos la posición exacta al hacer click en cualquier botón "Ingresar"
+            document.addEventListener('click', (e) => {
+                if (e.target && e.target.classList.contains('btn-ingresar')) {
+                    const scrollContainer = document.getElementById('scrollContainer');
+                    if (scrollContainer) {
+                        sessionStorage.setItem('botanicoScrollPos', scrollContainer.scrollTop);
                     }
                 }
-
-                // Comprobar soporte
-                if (!visor.isOrientationSupported()) {
-                    alert("Este celular o navegador no permite usar el sensor de orientación.");
-                    return;
-                }
-
-                // Activar sensor
-                visor.startOrientation();
-
-                boton.innerHTML = "📱 Movimiento activado";
-                boton.classList.add("activo");
-            };
-
-            document.getElementById("visor360").appendChild(boton);
-        });
-    }
-
-
-    function cerrarTour() {
-
-        if (visor) {
-            visor.stopOrientation();
-            visor.destroy();
-            visor = null;
-        }
-
-        document.getElementById("visor360").style.display = "none";
-        document.getElementById("panorama").innerHTML = "";
-
-        const boton = document.getElementById("botonMovimiento");
-
-        if (boton) {
-            boton.remove();
-        }
-    }
-</script>
+            });
+        })();
+    </script>
 </body>
 </html>
