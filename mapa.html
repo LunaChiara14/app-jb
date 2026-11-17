@@ -453,13 +453,14 @@
             /* ENCABEZADO */
 
             .hero-banner {
-                width: 100%;
-                max-width: 100%;
-                box-sizing: border-box;
-                padding-left: 10px;
-                padding-right: 10px;
-            }
-
+            background-size: cover;
+            background-position: center;
+            padding: 35px 24px 24px;
+            position: relative;
+            color: #ffffff;
+            border-bottom-left-radius: 28px;
+            border-bottom-right-radius: 28px;
+            
             .main-title {
                 font-size: 28px;
             }
@@ -545,6 +546,130 @@
 
     .app-body {
         padding-bottom: 110px !important;
+    }
+}
+
+/* ==========================================
+   AJUSTE DE PANTALLA COMPLETA PARA CELULARES
+   ENCABEZADO Y NAVEGACIÓN SIEMPRE FIJOS
+========================================== */
+
+@media (max-width: 600px) {
+
+    /* La página ocupa toda la pantalla */
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+        min-height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+
+    body {
+        display: block;
+        background-color: #e5ede8;
+    }
+
+    /* El contenedor ya no deja márgenes negros */
+    .app-container {
+        width: 100%;
+        max-width: none;
+        height: 100vh;
+        height: 100dvh;
+        min-height: 0;
+        max-height: none;
+        margin: 0;
+        border-radius: 0;
+        box-shadow: none;
+        overflow: hidden;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Encabezado superior fijo */
+    .hero-banner {
+        flex: 0 0 auto;
+        position: relative;
+        z-index: 10;
+        padding-top: calc(35px + env(safe-area-inset-top));
+    }
+
+    /* Botón de regreso */
+    .floating-back-btn {
+        top: calc(24px + env(safe-area-inset-top));
+    }
+
+    /* Solamente esta sección se desplaza */
+    .app-body {
+        flex: 1 1 auto;
+        min-height: 0;
+        overflow-y: auto;
+        overflow-x: hidden;
+        overscroll-behavior-y: contain;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: calc(100px + env(safe-area-inset-bottom));
+    }
+
+    /* Barra inferior siempre fija */
+    .bottom-nav {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: calc(75px + env(safe-area-inset-bottom));
+        padding-bottom: env(safe-area-inset-bottom);
+        z-index: 90;
+        flex-shrink: 0;
+    }
+
+    /* Mantener los elementos centrados */
+    .bottom-nav .nav-content {
+        height: 75px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+}
+/* =========================================
+   MÁRGENES LATERALES DEL MAPA EN CELULARES
+========================================= */
+
+@media (max-width: 600px) {
+
+    /* Separación entre el contenido y los bordes */
+    .app-body {
+        padding: 16px 16px calc(100px + env(safe-area-inset-bottom)) !important;
+        box-sizing: border-box;
+    }
+
+    /* Tarjeta del mapa */
+    .card-info {
+        width: 100%;
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 12px;
+        box-sizing: border-box;
+        border-radius: 20px;
+    }
+
+    /* Imagen del mapa */
+    .mapa-container {
+        width: 100%;
+        max-width: 100%;
+        margin: 0 auto;
+        border-radius: 12px;
+        overflow: hidden;
+        box-sizing: border-box;
+    }
+
+    #mapa-img {
+        width: 100%;
+        height: auto;
+        display: block;
     }
 }
     </style>

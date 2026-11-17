@@ -48,6 +48,8 @@
 
             <div class="carousel-section">
                 <h3>Especies del Sector <span>(Desliza <i class="fa-solid fa-arrow-right"></i>)</span></h3>
+                <h3><span style="color: black; font-size: medium; font-style: italic;">Presioná las imágenes para ampliarlas.</span></h3>
+                
                 <div class="species-carousel">
                     
                     <div class="species-card">
@@ -214,7 +216,20 @@
 
         </div>
     </div>
+<!-- VISOR AMPLIADO DE ESPECIES -->
+<div id="visorEspecie" aria-hidden="true">
 
+    <button
+        id="cerrarEspecie"
+        type="button"
+        aria-label="Cerrar imagen"
+        onclick="cerrarImagenEspecie()">
+        <i class="fa-solid fa-xmark"></i>
+    </button>
+
+    <img id="imagenAmpliada" src="" alt="Fotografía ampliada">
+
+</div>
 <script>
 
 const panoramas = [
@@ -630,37 +645,75 @@ document.addEventListener("keydown", function (evento) {
    CARRUSEL DE IMÁGENES DE LAS ESPECIES
 ========================================== */
 
-document.querySelectorAll(".card-img").forEach(function (card) {
-    const images = (card.dataset.images || "")
-        .split(",")
-        .map(function (img) {
-            return img.trim();
-        })
-        .filter(Boolean);
+/* ==========================================
+   VISOR AMPLIADO DE FOTOGRAFÍAS
+========================================== */
 
-    if (!images.length) return;
+const visorEspecie = document.getElementById("visorEspecie");
+const imagenAmpliada = document.getElementById("imagenAmpliada");
 
-    if (images.length === 1) {
-        card.style.backgroundImage = `url('${images[0]}')`;
-        return;
+/* Abrir fotografía */
+
+document.querySelectorAll(".card-img").forEach(function(card) {
+
+    card.addEventListener("click", function() {
+
+        let fondo = card.style.backgroundImage;
+
+        if (!fondo) {
+            fondo = window.getComputedStyle(card).backgroundImage;
+        }
+
+        let ruta = fondo
+            .replace(/^url\(["']?/, "")
+            .replace(/["']?\)$/, "");
+
+        if (!ruta || ruta === "none") {
+            console.error("No se encontró la fotografía de la especie");
+            return;
+        }
+
+        imagenAmpliada.src = ruta;
+
+        visorEspecie.classList.add("abierto");
+        visorEspecie.setAttribute("aria-hidden", "false");
+
+    });
+
+});
+
+/* Cerrar fotografía */
+
+function cerrarImagenEspecie() {
+
+    visorEspecie.classList.remove("abierto");
+    visorEspecie.setAttribute("aria-hidden", "true");
+
+    imagenAmpliada.src = "";
+
+}
+
+/* Cerrar tocando el fondo */
+
+visorEspecie.addEventListener("click", function(evento) {
+
+    if (evento.target === visorEspecie) {
+        cerrarImagenEspecie();
     }
 
-    let currentImage = 0;
+});
 
-    card.style.backgroundImage = `url('${images[0]}')`;
+/* Cerrar con Escape */
 
-    setInterval(function () {
-        card.classList.add("blink");
+document.addEventListener("keydown", function(evento) {
 
-        setTimeout(function () {
-            currentImage = (currentImage + 1) % images.length;
+    if (
+        evento.key === "Escape" &&
+        visorEspecie.classList.contains("abierto")
+    ) {
+        cerrarImagenEspecie();
+    }
 
-            card.style.backgroundImage =
-                `url('${images[currentImage]}')`;
-
-            card.classList.remove("blink");
-        }, 700);
-    }, 5000);
 });
 </script>
 </body>

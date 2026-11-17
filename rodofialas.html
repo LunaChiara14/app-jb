@@ -49,6 +49,8 @@
 
             <section class="carousel-section">
                 <h3>Especies del Sector <span>(Desliza <i class="fa-solid fa-arrow-right"></i>)</span></h3>
+                <h3><span style="color: black; font-size: medium; font-style: italic;">Presioná las imágenes para ampliarlas.</span></h3>
+                
                 <div class="species-carousel">
                     
                     <div class="species-card">
@@ -190,7 +192,20 @@
 
         </div>
     </div>
+<!-- VISOR AMPLIADO DE ESPECIES -->
+<div id="visorEspecie" aria-hidden="true">
 
+    <button
+        id="cerrarEspecie"
+        type="button"
+        aria-label="Cerrar imagen"
+        onclick="cerrarImagenEspecie()">
+        <i class="fa-solid fa-xmark"></i>
+    </button>
+
+    <img id="imagenAmpliada" src="" alt="Fotografía ampliada">
+
+</div>
 <script>
 
 const panoramas = [
@@ -615,42 +630,119 @@ document.addEventListener("keydown", function (evento) {
     }
 });
 
+
 /* ==========================================
-   CARRUSEL DE IMÁGENES DE LAS ESPECIES
+   CARRUSEL AUTOMÁTICO Y VISOR DE ESPECIES
 ========================================== */
 
-document.querySelectorAll(".card-img").forEach(function (card) {
+const visorEspecie = document.getElementById("visorEspecie");
+const imagenAmpliada = document.getElementById("imagenAmpliada");
+
+/* ==========================================
+   CONFIGURAR FOTOS DE CADA ESPECIE
+========================================== */
+
+document.querySelectorAll(".card-img").forEach(function(card) {
+
     const images = (card.dataset.images || "")
         .split(",")
-        .map(function (img) {
+        .map(function(img) {
             return img.trim();
         })
         .filter(Boolean);
 
-    if (!images.length) return;
-
-    if (images.length === 1) {
-        card.style.backgroundImage = `url('${images[0]}')`;
-        return;
-    }
-
     let currentImage = 0;
 
-    card.style.backgroundImage = `url('${images[0]}')`;
+    /* Si tiene fotografías configuradas */
+    if (images.length > 0) {
 
-    setInterval(function () {
-        card.classList.add("blink");
+        /* Mostrar la primera fotografía */
+        card.style.backgroundImage = `url("${images[0]}")`;
 
-        setTimeout(function () {
-            currentImage = (currentImage + 1) % images.length;
+        /* Si tiene más de una, activar el carrusel */
+        if (images.length > 1) {
 
-            card.style.backgroundImage =
-                `url('${images[currentImage]}')`;
+            setInterval(function() {
 
-            card.classList.remove("blink");
-        }, 700);
-    }, 5000);
+                card.classList.add("blink");
+
+                setTimeout(function() {
+
+                    currentImage = (currentImage + 1) % images.length;
+
+                    card.style.backgroundImage =
+                        `url("${images[currentImage]}")`;
+
+                    card.classList.remove("blink");
+
+                }, 700);
+
+            }, 5000);
+        }
+    }
+
+    /* ======================================
+       ABRIR LA FOTO ACTUAL EN GRANDE
+    ====================================== */
+
+    card.addEventListener("click", function() {
+
+        const fondo = window.getComputedStyle(card).backgroundImage;
+
+        const coincidencia = fondo.match(/url\(["']?(.*?)["']?\)/);
+
+        if (!coincidencia) return;
+
+        imagenAmpliada.src = coincidencia[1];
+
+        visorEspecie.classList.add("abierto");
+        visorEspecie.setAttribute("aria-hidden", "false");
+
+        document.body.style.overflow = "hidden";
+
+    });
+
 });
+
+/* ==========================================
+   CERRAR EL VISOR
+========================================== */
+
+function cerrarImagenEspecie() {
+
+    visorEspecie.classList.remove("abierto");
+
+    visorEspecie.setAttribute("aria-hidden", "true");
+
+    imagenAmpliada.src = "";
+
+    document.body.style.overflow = "";
+
+}
+
+/* Cerrar tocando el fondo oscuro */
+
+visorEspecie.addEventListener("click", function(evento) {
+
+    if (evento.target === visorEspecie) {
+        cerrarImagenEspecie();
+    }
+
+});
+
+/* Cerrar con Escape */
+
+document.addEventListener("keydown", function(evento) {
+
+    if (
+        evento.key === "Escape" &&
+        visorEspecie.classList.contains("abierto")
+    ) {
+        cerrarImagenEspecie();
+    }
+
+});
+
 </script>
 </body>
 </html>
