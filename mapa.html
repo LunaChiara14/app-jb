@@ -1,0 +1,835 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Jardín Botánico - MAPA</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        :root {
+            --bg-cream: #e1e7c5;
+            --panel-cream: #edf0d5;
+            --text-dark: #333333;
+            --green-circle: #5b762e;
+            --inta-blue: #00529b;
+            --inta-red: #d9232e;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #2b2b2b;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .card-info {
+            background: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+            margin: 16px;
+            padding: 16px;
+            box-sizing: border-box;
+        }
+
+        .card-info h3 {
+            margin-top: 0;
+            margin-bottom: 12px;
+            font-size: 1.3rem;
+            color: #333;
+            font-weight: 700;
+        }
+
+        /* CONTENEDOR DEL MAPA Y CAPA SVG INTERACTIVA */
+        .mapa-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            background-color: #ffffff;
+            border-radius: 16px;
+            touch-action: manipulation;
+        }
+
+        #mapa-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.2s ease-out;
+            transform-origin: center center;
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+
+        /* SVG ENCIMA DE LA IMAGEN */
+        .zonas-svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: auto;
+        }
+
+        .zona {
+            fill: transparent;
+            stroke: transparent;
+            stroke-width: 4;
+            vector-effect: non-scaling-stroke;
+            cursor: pointer;
+            transition: fill 0.25s, stroke 0.25s, filter 0.25s;
+        }
+
+        .zona:hover {
+            fill: rgba(255, 221, 45, 0.25);
+        }
+
+        /* EFECTO DE ILUMINACIÓN Y RESPLANDOR */
+        .zona.activa {
+            fill: rgba(255, 221, 45, 0.30);
+            stroke: #ffe000;
+            stroke-width: 4;
+            filter: drop-shadow(0 0 3px #fff000) drop-shadow(0 0 6px #ffe000);
+            animation: pulsar 1.8s infinite;
+        }
+
+        @keyframes pulsar {
+            0% {
+                fill: rgba(255, 221, 45, 0.20);
+            }
+            50% {
+                fill: rgba(255, 221, 45, 0.38);
+            }
+            100% {
+                fill: rgba(255, 221, 45, 0.20);
+            }
+        }
+
+        /* PANEL CENTRAL */
+        .main-panel {
+            background-color: var(--panel-cream);
+            padding: 15px;
+            border: 1px solid #d0d7b2;
+            margin-top: 10px;
+            border-radius: 20px;
+        }
+
+        .section-title {
+            font-size: 17px;
+            font-weight: bold;
+            color: #2c3815;
+            margin-bottom: 12px;
+            border-bottom: 2px solid #cbd4a9;
+            padding-bottom: 4px;
+        }
+
+        /* LISTAS E ÍTEMS INTERACTIVOS */
+        .grid-2-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px 15px;
+            margin-bottom: 20px;
+        }
+
+        .ref-item {
+            display: flex;
+            align-items: center;
+            font-size: 13px;
+            font-weight: 600;
+            color: #2b3318;
+            cursor: pointer;
+            padding: 4px 6px;
+            border-radius: 8px;
+            transition: background-color 0.2s, color 0.2s;
+            user-select: none;
+        }
+
+        .ref-item:hover {
+            background-color: #dbe2b8;
+        }
+
+        .ref-item.activo {
+            background-color: #315b32;
+            color: #ffffff;
+        }
+
+        .ref-item.activo .num-badge {
+            background-color: #ffe000;
+            color: #2b3318;
+        }
+
+        .num-badge {
+            background-color: var(--green-circle);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: bold;
+            margin-right: 8px;
+            flex-shrink: 0;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        /* SIMBOLOGÍA E INSTALACIONES */
+        .simbologia-section {
+            margin-top: 15px;
+            padding-top: 10px;
+            border-top: 1px solid #c4cd9f;
+        }
+
+        .simbolo-item {
+            display: flex;
+            align-items: center;
+            font-size: 13px;
+            font-weight: 600;
+            color: #2b3318;
+        }
+
+        .icon-box {
+            width: 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 8px;
+            font-size: 14px;
+        }
+
+        /* ÍCONOS */
+        .icon-inta {
+            background: white;
+            border: 1px solid #999;
+            color: red;
+            font-size: 8px;
+            font-weight: bold;
+            padding: 1px 2px;
+        }
+
+        .icon-policia {
+            background: #c0392b;
+            color: white;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .icon-auxilios {
+            background: #c0392b;
+            color: white;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            font-size: 11px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .icon-estacionamiento {
+            border: 1px solid #333;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .icon-aqui {
+            color: #8e44ad;
+            font-size: 16px;
+        }
+
+        .icon-invernaculo {
+            color: #3498db;
+            letter-spacing: -2px;
+            font-size: 10px;
+        }
+
+        .icon-recursos {
+            background: #e67e22;
+            width: 16px;
+            height: 10px;
+            border-radius: 2px;
+        }
+
+        .icon-germoplasma {
+            background: #8d543a;
+            width: 16px;
+            height: 10px;
+        }
+
+        .icon-aromaticas {
+            color: #2980b9;
+        }
+
+        .icon-visitantes {
+            background: #e67e22;
+            width: 14px;
+            height: 10px;
+        }
+
+        .icon-laguna {
+            color: #2980b9;
+        }
+
+        /* =========================================
+           AJUSTES EXCLUSIVOS PARA CELULARES
+        ========================================= */
+
+        @media (max-width: 600px) {
+
+            html {
+                width: 100%;
+                max-width: 100%;
+                margin: 0;
+                padding: 0;
+                overflow-x: hidden;
+                overflow-y: auto;
+            }
+
+            body {
+                display: block;
+                width: 100%;
+                min-width: 0;
+                min-height: 100vh;
+                height: auto;
+                padding: 8px;
+                margin: 0;
+                box-sizing: border-box;
+                overflow-x: hidden;
+                overflow-y: auto;
+            }
+
+            .app-container {
+                display: block;
+                width: 100%;
+                max-width: 100%;
+                min-width: 0;
+                margin: 0 auto;
+                padding: 0;
+                box-sizing: border-box;
+                overflow: visible;
+            }
+
+            .app-body {
+                display: block;
+                width: 100%;
+                max-width: 100%;
+                min-width: 0;
+                height: auto;
+                margin: 0;
+                padding: 0 0 100px;
+                box-sizing: border-box;
+                overflow: visible;
+            }
+
+            .card-info {
+                display: block;
+                width: 100%;
+                max-width: 100%;
+                min-width: 0;
+                margin: 0 auto;
+                padding: 10px;
+                border-radius: 12px;
+                box-sizing: border-box;
+            }
+
+            .card-info h3 {
+                font-size: 1.15rem;
+                margin-bottom: 10px;
+            }
+
+            /* MAPA CENTRADO Y FIJO EN EL ANCHO DE LA PANTALLA */
+
+            .mapa-container {
+                position: relative;
+                display: block;
+                width: 100%;
+                max-width: 100%;
+                min-width: 0;
+                margin: 0 auto;
+                padding: 0;
+                overflow: hidden;
+                border-radius: 10px;
+                box-sizing: border-box;
+                touch-action: pan-y;
+            }
+
+            #mapa-img {
+                display: block;
+                width: 100%;
+                max-width: 100%;
+                height: auto;
+                margin: 0 auto;
+                padding: 0;
+                transform: none !important;
+                transition: none;
+                touch-action: pan-y;
+            }
+
+            .zonas-svg {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+
+            /* REFERENCIAS */
+
+            .grid-2-col {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 6px;
+                width: 100%;
+                margin-bottom: 15px;
+            }
+
+            .ref-item {
+                display: flex;
+                width: 100%;
+                min-width: 0;
+                box-sizing: border-box;
+                font-size: 13px;
+                line-height: 1.3;
+                padding: 7px 6px;
+                white-space: normal;
+                overflow-wrap: break-word;
+            }
+
+            .num-badge {
+                width: 22px;
+                height: 22px;
+                min-width: 22px;
+                margin-right: 8px;
+            }
+
+            /* SIMBOLOGÍA */
+
+            .simbologia-section {
+                width: 100%;
+                min-width: 0;
+            }
+
+            .simbologia-section .grid-2-col {
+                grid-template-columns: 1fr;
+                gap: 7px;
+            }
+
+            .simbolo-item {
+                display: flex;
+                min-width: 0;
+                font-size: 13px;
+                line-height: 1.3;
+                overflow-wrap: break-word;
+            }
+
+            .icon-box {
+                min-width: 24px;
+                flex-shrink: 0;
+            }
+
+            .section-title {
+                font-size: 16px;
+                line-height: 1.3;
+            }
+
+            /* ENCABEZADO */
+
+            .hero-banner {
+                width: 100%;
+                max-width: 100%;
+                box-sizing: border-box;
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+
+            .main-title {
+                font-size: 28px;
+            }
+
+            .informacion-name {
+                font-size: 1rem;
+                line-height: 1.4;
+            }
+
+            .main-panel {
+                width: 100%;
+                max-width: 100%;
+                min-width: 0;
+                padding: 12px;
+                border-radius: 16px;
+                box-sizing: border-box;
+            }
+
+            /* NAVEGACIÓN INFERIOR */
+
+            .bottom-nav {
+                max-width: 100%;
+                box-sizing: border-box;
+            }
+        }
+
+        /* =========================================
+           CELULARES MUY CHICOS
+        ========================================= */
+
+        @media (max-width: 380px) {
+
+            body {
+                padding: 5px;
+            }
+
+            .card-info {
+                padding: 8px;
+            }
+
+            .main-panel {
+                padding: 9px;
+            }
+
+            .ref-item,
+            .simbolo-item {
+                font-size: 12px;
+            }
+
+            .num-badge {
+                width: 20px;
+                height: 20px;
+                min-width: 20px;
+                font-size: 10px;
+            }
+
+            .section-title {
+                font-size: 15px;
+            }
+        }
+        /* =========================================
+   CORRECCIÓN DE LA BARRA INFERIOR EN CELULAR
+========================================= */
+
+@media (max-width: 600px) {
+
+    .bottom-nav {
+        position: fixed !important;
+        top: auto !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+
+        transform: none !important;
+        z-index: 9999;
+
+        box-sizing: border-box;
+    }
+
+    .app-body {
+        padding-bottom: 110px !important;
+    }
+}
+    </style>
+</head>
+
+<body>
+
+    <div class="app-container">
+
+        <a href="index.html" class="floating-back-btn">
+            <i class="fa-solid fa-chevron-left"></i>
+        </a>
+
+        <header class="hero-banner">
+            <div class="meta-tag">JARDÍN BOTÁNICO - MAPA</div>
+            <h1 class="main-title">Mapa</h1>
+            <p class="informacion-name">Consultá el mapa interactivo del jardín para ubicar los sectores y sus puntos clave.</p>
+
+            <div class="acorn-badge">
+                <i class="fa-solid fa-map-location-dot"></i>
+            </div>
+        </header>
+
+        <main class="app-body">
+
+            <div class="card-info">
+
+                <h3 style="margin-bottom: 5px;">Mapa</h3>
+                <p class="informacion-name" style="color: #000000; margin-bottom: 12px;">Tocá los nombres de los sectores para iluminar su área.</p>
+
+                <div class="mapa-container" id="contenedor-mapa">
+                    <img
+                        src="mapa.jpg"
+                        id="mapa-img"
+                        alt="Mapa del sector"
+                    >
+
+                    <!-- CAPA INTERACTIVA SOBRE EL MAPA -->
+                    <svg class="zonas-svg" viewBox="0 0 1408 1056" preserveAspectRatio="none">
+                        <polygon id="sector1" class="zona" points="360,720 620,720 620,850 360,850" onclick="activarSector(1)" />
+                        <polygon id="sector2" class="zona" points="420,530 550,530 550,700 420,700" onclick="activarSector(2)" />
+                        <polygon id="sector3" class="zona" points="300,530 400,530 400,700 300,700" onclick="activarSector(3)" />
+                        <polygon id="sector4" class="zona" points="55,530 180,530 180,700 55,700" onclick="activarSector(4)" />
+                        <polygon id="sector5" class="zona" points="200,530 320,530 320,700 200,700" onclick="activarSector(5)" />
+                        <polygon id="sector6" class="zona" points="400,320 800,320 800,505 400,505" onclick="activarSector(6)" />
+                        <polygon id="sector7" class="zona" points="350,95 1100,95 1100,310 350,310" onclick="activarSector(7)" />
+                        <polygon id="sector8" class="zona" data-sector="8" points="1100,95 1250,95 1250,310 1100,310" onclick="activarSector(8)" />
+                        <polygon id="sector9" class="zona" points="1000,530 820,530 820,600 1000,600" onclick="activarSector(9)" />
+                        <polygon id="sector10" class="zona" points="1010,530 1150,530 1150,700 1010,700" onclick="activarSector(10)" />
+                        <polygon id="sector11" class="zona" points="1150,530 1250,530 1250,700 1150,700" onclick="activarSector(11)" />
+                        <polygon id="sector12" class="zona" points="920,610 1010,610 1010,700 920,700" onclick="activarSector(12)" />
+                        <polygon id="sector13" class="zona" points="820,720 930,720 930,780 820,780" onclick="activarSector(13)" />
+                        <polygon id="sector14" class="zona" points="840,610 700,610 700,700 840,700" onclick="activarSector(14)" />
+                        <polygon id="sector15" class="zona" points="920,570 820,570 820,700 920,700" onclick="activarSector(15)" />
+                        <polygon id="sector16" class="zona" points="840,530 700,530 700,620 840,620" onclick="activarSector(16)" />
+                        <polygon id="sector17" class="zona" points="720,530 500,530 500,700 720,700" onclick="activarSector(17)" />
+                        <polygon id="sector18" class="zona" data-sector="8" points="800,320 1000,320 1000,505 800,505" onclick="activarSector(8)" />
+                    </svg>
+                </div>
+
+                <div class="cartel">
+                    <div class="header-band"></div>
+
+                    <div class="main-panel">
+                        <div class="section-title">Referencias</div>
+
+                        <!-- REFERENCIAS 1 A 17 -->
+                        <div class="grid-2-col">
+
+                            <div class="ref-item" data-sector="1" onclick="activarSector(1)">
+                                <span class="num-badge">1</span> Cactus, Crasas y Orquídeas
+                            </div>
+
+                            <div class="ref-item" data-sector="10" onclick="activarSector(10)">
+                                <span class="num-badge">10</span> Bambúceas
+                            </div>
+
+                            <div class="ref-item" data-sector="2" onclick="activarSector(2)">
+                                <span class="num-badge">2</span> Jardín de Aromáticas
+                            </div>
+
+                            <div class="ref-item" data-sector="11" onclick="activarSector(11)">
+                                <span class="num-badge">11</span> Gimnospermas
+                            </div>
+
+                            <div class="ref-item" data-sector="3" onclick="activarSector(3)">
+                                <span class="num-badge">3</span> Plantas Medicinales
+                            </div>
+
+                            <div class="ref-item" data-sector="12" onclick="activarSector(12)">
+                                <span class="num-badge">12</span> Avenida de las Palmeras
+                            </div>
+
+                            <div class="ref-item" data-sector="4" onclick="activarSector(4)">
+                                <span class="num-badge">4</span> Leguminosas
+                            </div>
+
+                            <div class="ref-item" data-sector="13" onclick="activarSector(13)">
+                                <span class="num-badge">13</span> Jardín de Gramíneas
+                            </div>
+
+                            <div class="ref-item" data-sector="5" onclick="activarSector(5)">
+                                <span class="num-badge">5</span> Árboles urbanos
+                            </div>
+
+                            <div class="ref-item" data-sector="14" onclick="activarSector(14)">
+                                <span class="num-badge">14</span> Sendero de Atracción de Mariposas
+                            </div>
+
+                            <div class="ref-item" data-sector="6" onclick="activarSector(6)">
+                                <span class="num-badge">6</span> Mirtáceas
+                            </div>
+
+                            <div class="ref-item" data-sector="15" onclick="activarSector(15)">
+                                <span class="num-badge">15</span> Casuarinas
+                            </div>
+
+                            <div class="ref-item" data-sector="7" onclick="activarSector(7)">
+                                <span class="num-badge">7</span> Regiones Fitogeográficas
+                            </div>
+
+                            <div class="ref-item" data-sector="16" onclick="activarSector(16)">
+                                <span class="num-badge">16</span> Salicáceas
+                            </div>
+
+                            <div class="ref-item" data-sector="8" onclick="activarSector(8,18)">
+                                <span class="num-badge">8</span> Pastizal Pampeano
+                            </div>
+
+                            <div class="ref-item" data-sector="17" onclick="activarSector(17)">
+                                <span class="num-badge">17</span> Avenida de los Robles
+                            </div>
+
+                            <div class="ref-item" data-sector="9" onclick="activarSector(9)">
+                                <span class="num-badge">9</span> Rodofialas
+                            </div>
+
+                        </div>
+
+                        <!-- SIMBOLOGÍA E INSTALACIONES -->
+                        <div class="simbologia-section">
+                            <div class="grid-2-col">
+
+                                <div class="simbolo-item">
+                                    <span class="icon-box"><span class="icon-inta">INTA</span></span> Entrada INTA
+                                </div>
+
+                                <div class="simbolo-item">
+                                    <span class="icon-box" style="color: #7e5031;">▬</span> Anexo
+                                </div>
+
+                                <div class="simbolo-item">
+                                    <span class="icon-box"><span class="icon-policia">👮</span></span> Control Policial
+                                </div>
+
+                                <div class="simbolo-item">
+                                    <span class="icon-box"><span class="icon-invernaculo">░░</span></span> Sector de Invernáculos
+                                </div>
+
+                                <div class="simbolo-item">
+                                    <span class="icon-box"><span class="icon-auxilios">+</span></span> Primeros Auxilios
+                                </div>
+
+                                <div class="simbolo-item">
+                                    <span class="icon-box"><span class="icon-recursos"></span></span> Instituto de Recursos Biológicos
+                                </div>
+
+                                <div class="simbolo-item">
+                                    <span class="icon-box"><span class="icon-estacionamiento">E</span></span> Estacionamiento
+                                </div>
+
+                                <div class="simbolo-item">
+                                    <span class="icon-box"><span class="icon-germoplasma"></span></span> Banco Base de Germoplasma
+                                </div>
+
+                                <div class="simbolo-item">
+                                    <span class="icon-box" style="color: #c0b000; border: #000000;">➔</span> Acceso JBAER
+                                </div>
+
+                                <div class="simbolo-item">
+                                    <span class="icon-box"><span class="icon-aromaticas">🔷</span></span> Lab. de Aromáticas
+                                </div>
+
+                                <div class="simbolo-item">
+                                    <span class="icon-box">
+                                        <iconify-icon icon="mdi:circle" style="color: #66b559;"></iconify-icon>
+                                    </span>
+                                    Área de Descanso
+                                </div>
+
+                                <div class="simbolo-item">
+                                    <span class="icon-box"><span class="icon-visitantes"></span></span> Centro de Visitantes
+                                </div>
+
+                                <div class="simbolo-item">
+                                    <span class="icon-box" style="color: #7b1959;">✻</span> Usted está aquí
+                                </div>
+
+                                <div class="simbolo-item">
+                                    <span class="icon-box"><span class="icon-laguna">💧</span></span> Laguna
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <nav class="bottom-nav">
+                <div class="nav-blur-bg"></div>
+
+                <div class="nav-content">
+                    <a href="mapa.html" class="nav-item">
+                        <i class="fa-solid fa-map-location-dot"></i>
+                        <span>MAPA</span>
+                    </a>
+
+                    <div class="center-compass">
+                        <div class="compass-inner">
+                            <a href="https://maps.app.goo.gl/RQd1mriN7XWTD4Qx9" class="nav-item">
+                                <i class="fa-solid fa-compass"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <a href="index.html" class="nav-item active">
+                        <i class="fa-solid fa-seedling"></i>
+                        <span>SECTORES</span>
+                    </a>
+                </div>
+            </nav>
+
+        </main>
+
+    </div>
+
+    <script>
+        function activarSector(numero1, numero2 = null) {
+
+            // Apaga todos los sectores
+            document.querySelectorAll('.zona').forEach(z => {
+                z.classList.remove('activa');
+            });
+
+            // Desmarca todas las referencias
+            document.querySelectorAll('.ref-item').forEach(r => {
+                r.classList.remove('activo');
+            });
+
+            // Si es el sector 8, activa sus dos partes
+            if (numero1 === 8) {
+                document.querySelectorAll('.zona[data-sector="8"]').forEach(z => {
+                    z.classList.add('activa');
+                });
+            } else {
+                // Para los demás sectores, funciona normalmente
+                const sector = document.getElementById('sector' + numero1);
+
+                if (sector) {
+                    sector.classList.add('activa');
+                }
+            }
+
+            // Activa la referencia
+            const ref1 = document.querySelector(
+                `.ref-item[data-sector="${numero1}"]`
+            );
+
+            if (ref1) {
+                ref1.classList.add('activo');
+            }
+        }
+
+        // Al tocar una referencia, lleva el mapa a la vista
+        document.querySelectorAll('.ref-item').forEach(item => {
+            item.addEventListener('click', () => {
+                document.getElementById('contenedor-mapa').scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

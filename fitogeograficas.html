@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Regiones Fitogeográficas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum/build/pannellum.css" />
+    <script src="https://cdn.jsdelivr.net/npm/pannellum/build/pannellum.js"></script>
+    <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+</head>
+<body>
+    <div class="app-container">
+
+        <a href="index.html" class="floating-back-btn">
+            <i class="fa-solid fa-chevron-left"></i>
+        </a>
+
+        <header class="hero-banner">
+            <div class="meta-tag">JARDÍN BOTÁNICO - SECTORES</div>
+            <h1 class="main-title">Regiones Fitogeográficas</h1>
+            <div class="acorn-badge">
+                <iconify-icon icon="mdi:tree-outline"></iconify-icon>
+            </div>
+        </header>
+
+        <main class="app-body">
+            <section class="card-info">
+                <h3><i class="fa-solid fa-vr-cardboard"></i> Experiencia 360°</h3>
+                <div
+                    class="panorama-container"
+                    onclick="abrirTour('360/360fito1.png')"
+                    style="background-image: url('360/360fito1.png');"
+                    role="button"
+                    tabindex="0"
+                    aria-label="Abrir recorrido virtual 360 grados"
+                    onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); abrirTour('360prueba.jpg'); }">
+
+                    <div class="panorama-placeholder">
+                        <i id="icono-360" class="fa-solid fa-vr-cardboard"></i>
+                        <p id="texto-360">Tocá para explorar el entorno en 360°</p>
+                    </div>
+                </div>
+
+            </section>
+
+            <section class="carousel-section">
+                <h3>Especies del sector <span>(Desliza <i class="fa-solid fa-arrow-right"></i>)</span></h3>
+                <div class="species-carousel">
+                    
+                    <div class="species-card">
+                        <div class="card-img" style="background-image: url('fitogeograficas/neltumaalba.jfif');"></div>
+                        <div class="card-detail">
+                            <h4>Algarrobo blanco</h4>
+                            <span class="sci-name" style="color: black;">Neltuma alba</span>
+                            <span class="sci-name">Sitio web Flora Argentina</span>
+                            <a href="https://drive.google.com/file/d/1BBUPV_TKxJfjKlmehcsVOXDBt2tUJEmB/view?usp=drive_link" target="_blank" class="btn-ficha">Ficha <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="species-card">
+                        <div class="card-img" style="background-image: url('fitogeograficas/neltumaaffinis.jfif');"></div>
+                        <div class="card-detail">
+                            <h4>Ñandubay</h4>
+                            <span class="sci-name" style="color: black;">Neltuma affinis</span>
+                            <span class="sci-name">Sitio Web Flora Argentina</span>
+                            <a href="https://drive.google.com/file/d/1tHFhsJv9wPka-l9UPrKNR1YeBVwiEV9A/view?usp=drive_link" target="_blank" class="btn-ficha">Ficha <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="species-card">
+                        <div class="card-img" style="background-image: url('fitogeograficas/araucariaangustifolia.jpg');"></div>
+                        <div class="card-detail">
+                            <h4>Pino Paraná</h4>
+                            <span class="sci-name" style="color: black;">Araucaria angustifolia</span>
+                            <span class="sci-name">Sitio Web Kew Botanical Garden</span>
+                            <a href="https://drive.google.com/file/d/1kjeUxv62croxF9phbidRsc5dJDCKKbU5/view?usp=drive_link" target="_blank" class="btn-ficha">Ficha <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="species-card">
+                        <div class="card-img" style="background-image: url('fitogeograficas/vachelliacaven.jpg');"></div>
+                        <div class="card-detail">
+                            <h4>Espinillo</h4>
+                            <span class="sci-name" style="color: black;">Vachellia caven</span>
+                            <span class="sci-name">Sitio Web Flora Argentina</span>
+                            <a href="https://drive.google.com/file/d/1mkz3tg74w4YHPr0_fWbIq4ZbbStiBNbE/view?usp=drive_link" target="_blank" class="btn-ficha">Ficha <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="species-card">
+                        <div class="card-img" style="background-image: url('fitogeograficas/schinopsisbalansae.jfif');"></div>
+                        <div class="card-detail">
+                            <h4 style="font-size: small;">Quebracho colorado chaqueño</h4>
+                            <span class="sci-name" style="color: black;">Schinopsis balansae</span>
+                            <span class="sci-name">Sitio Web Flora Argentina</span>
+                            <a href="https://drive.google.com/file/d/1MnYOsM72OEfl3bgdw5n29EWdp8aXDR3_/view?usp=drive_link" target="_blank" class="btn-ficha">Ficha <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="species-card">
+                        <div class="card-img" style="background-image: url('fitogeograficas/gleditsiaamorphoides.jfif');"></div>
+                        <div class="card-detail">
+                            <h4>Espina corona</h4>
+                            <span class="sci-name" style="color: black;">Gleditsia amorphoides</span>
+                            <span class="sci-name">Sitio Web Flora Argentina</span>
+                            <a href="https://drive.google.com/file/d/1whbuKjL8JFGQ-V5fDYNUv_u9yqcJw0X8/view?usp=drive_link" target="_blank" class="btn-ficha">Ficha <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="species-card">
+                        <div class="card-img" style="background-image: url('fitogeograficas/parkinsoniaaculeata.jfif');"></div>
+                        <div class="card-detail">
+                            <h4>Cina cina</h4>
+                            <span class="sci-name" style="color: black;">Parkinsonia aculeata</span>
+                            <span class="sci-name">Sitio Web Flora Argentina</span>
+                            <a href="https://drive.google.com/file/d/10z3En7JqzzvxlLxzOyzt4q0v_39_Tmw1/view?usp=drive_link" target="_blank" class="btn-ficha">Ficha <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="species-card">
+                        <div class="card-img" style="background-image: url('fitogeograficas/geoffroeadecorticans.jfif');"></div>
+                        <div class="card-detail">
+                            <h4>Chañar</h4>
+                            <span class="sci-name" style="color: black;">Geoffroea decorticans</span>
+                            <span class="sci-name">Sitio Web Flora Argentina</span>
+                            <a href="https://drive.google.com/file/d/1PC8naGp7rhYFfYxIN6r2-QBDBkBy-0M4/view?usp=drive_link" target="_blank" class="btn-ficha">Ficha <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="species-card">
+                        <div class="card-img" style="background-image: url('fitogeograficas/jodinarhombifolia.jfif');"></div>
+                        <div class="card-detail">
+                            <h4>Sombra de toro</h4>
+                            <span class="sci-name" style="color: black;">Jodina rhombifolia</span>
+                            <span class="sci-name">Sitio Web Flora Argentina</span>
+                            <a href="https://drive.google.com/file/d/1vmaF5fIg0KzTWLHXe69uA_e5qHDvixXg/view?usp=drive_link" target="_blank" class="btn-ficha">Ficha <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="species-card">
+                        <div class="card-img" style="background-image: url('fitogeograficas/scutiabuxifolia.jpg');"></div>
+                        <div class="card-detail">
+                            <h4>Coronillo</h4>
+                            <span class="sci-name" style="color: black;">Scutia buxifolia</span>
+                            <span class="sci-name">Sitio Web Flora Argentina</span>
+                            <a href="https://drive.google.com/file/d/11mcOm8X1Engf-ybtcW_2IxeuCArLKgqX/view?usp=drive_link" target="_blank" class="btn-ficha">Ficha <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="species-card">
+                        <div class="card-img" style="background-image: url('fitogeograficas/Celtistala.jpg');"></div>
+                        <div class="card-detail">
+                            <h4>Tala</h4>
+                            <span class="sci-name" style="color: black;">Celtis tala</span>
+                            <span class="sci-name">Sitio Web Flora Argentina</span>
+                            <a href="https://drive.google.com/file/d/1UM8d-C6-oNjLhxTLc11fNFi5BGHVYNov/view?usp=drive_link" target="_blank" class="btn-ficha">Ficha <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="species-card">
+                        <div class="card-img" style="background-image: url('fitogeograficas/colletiaparadoxa.jpg');"></div>
+                        <div class="card-detail">
+                            <h4>Curro</h4>
+                            <span class="sci-name" style="color: black;">Colletia paradoxa</span>
+                            <span class="sci-name">Sitio Web Flora Argentina</span>
+                            <a href="https://drive.google.com/file/d/1RaSmOxHlvSPYFHbQlohFSVNA7EX_zrxU/view?usp=drive_link" target="_blank" class="btn-ficha">Ficha <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="species-card">
+                        <div class="card-img" style="background-image: url('fitogeograficas/Schinuslongifolius.jfif');"></div>
+                        <div class="card-detail">
+                            <h4>Molle</h4>
+                            <span class="sci-name" style="color: black;">Schinus longifolia</span>
+                            <span class="sci-name">Sitio Web Flora Argentina</span>
+                            <a href="https://drive.google.com/file/d/1U8huac3Nqz58KGLZTwllgCyDSGtlb8Sg/view?usp=drive_link" target="_blank" class="btn-ficha">Ficha <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="species-card">
+                        <div class="card-img" style="background-image: url('fitogeograficas/Phytolaccadioica.jfif');"></div>
+                        <div class="card-detail">
+                            <h4>Ombú</h4>
+                            <span class="sci-name" style="color: black;">Phytolacca dioica</span>
+                            <span class="sci-name">Sitio Web Flora Argentina</span>
+                            <a href="https://drive.google.com/file/d/1BnDi07MSvvOAAOQZKh3B3pYBl5BwuMcX/view?usp=drive_link" target="_blank" class="btn-ficha">Ficha <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </div>
+                    </div>
+
+                </div>
+                <h3>Información del sector y recorrido</h3>
+            </section>
+
+            <section class="metrics-grid">
+                <div class="metric-box">
+                    <span class="metric-label" style="text-align: center;">DURACIÓN DEL RECORRIDO</span>
+                    <div class="metric-icon-wrapper"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                    <span class="metric-value">15 min</span>
+                </div>
+                <div class="metric-box">
+                    <span class="metric-label" style="text-align: center;">DISTANCIA AL SECTOR</span>
+                    <div class="metric-icon-wrapper"><i class="fa-solid fa-route"></i></div>
+                    <span class="metric-value">500 mts</span>
+                </div>
+                <div class="metric-box">
+                    <span class="metric-label" style="text-align: center;">ESTACIÓN IDEAL PARA VISITAR</span>
+                    <div class="metric-icon-wrapper"><iconify-icon icon="mdi:flower-tulip-outline"></iconify-icon></div>
+                    <span class="metric-value">Primavera</span>
+                </div>
+            </section>
+
+        </main>
+
+        <nav class="bottom-nav">
+            <div class="nav-blur-bg"></div>
+            <div class="nav-content">
+            <a href="mapa.html" class="nav-item">
+                <i class="fa-solid fa-map-location-dot"></i>
+            <span>MAPA</span>
+            </a>
+        
+            <div class="center-compass">
+            <div class="compass-inner">
+                <a href="https://maps.app.goo.gl/RQd1mriN7XWTD4Qx9" class="nav-item">
+                <i class="fa-solid fa-compass"></i>
+                </a>
+            </div>
+            </div>
+            
+            <a href="index.html" class="nav-item active">
+            <i class="fa-solid fa-seedling"></i>
+            <span>SECTORES</span>
+            </a>
+            </div>
+        </nav>
+    </div>
+
+<!-- VISOR 360 -->
+    <div id="visor360" aria-hidden="true">
+
+        <button id="cerrar" type="button" aria-label="Cerrar visor"
+                onclick="cerrarTour()">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <div class="visor-panel">
+
+            <div class="visor-titulo">
+                <i class="fa-solid fa-vr-cardboard"></i>
+                Regiones Fitogeográficas
+            </div>
+
+            <!-- Las flechas se superponen a la imagen, no quedan debajo -->
+            <div class="panorama-visor-wrap">
+
+                <div id="panorama"></div>
+
+                <button
+                    id="panoramaAnterior"
+                    class="flecha-recorrido izquierda"
+                    type="button"
+                    aria-label="Panorama anterior"
+                    onclick="cambiarPanorama(-1)">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+
+                <button
+                    id="panoramaSiguiente"
+                    class="flecha-recorrido derecha"
+                    type="button"
+                    aria-label="Panorama siguiente"
+                    onclick="cambiarPanorama(1)">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+
+                <div id="indicadorPanorama">1/2</div>
+
+            </div>
+
+            <div class="visor-controles">
+
+                <button id="modoTactil" class="modo-btn activo" type="button">
+                    <i class="fa-solid fa-hand-pointer"></i>
+                    Táctil
+                </button>
+
+                <button id="modoMovimiento" class="modo-btn" type="button">
+                    <i class="fa-solid fa-mobile-screen-button"></i>
+                    Movimiento
+                </button>
+
+                <button id="zoomMenos" class="control-btn" type="button"
+                        aria-label="Alejar">
+                    <i class="fa-solid fa-minus"></i>
+                </button>
+
+                <button id="zoomMas" class="control-btn" type="button"
+                        aria-label="Acercar">
+                    <i class="fa-solid fa-plus"></i>
+                </button>
+
+                <button id="pantallaCompleta" class="control-btn" type="button"
+                        aria-label="Pantalla completa">
+                    <i class="fa-solid fa-expand"></i>
+                </button>
+
+            </div>
+
+            <p id="estado360">
+                Arrastrá el dedo para mirar alrededor.
+            </p>
+
+        </div>
+    </div>
+
+<script>
+/* ==========================================
+   CONFIGURACIÓN DE LOS PANORAMAS
+========================================== */
+
+const panoramas = [
+    { id: "foto1", archivo: "360/360fito1.png" },
+    { id: "foto2", archivo: "360/360fito2.png" },
+    { id: "foto3", archivo: "360/360fito3.png" },
+    { id: "foto4", archivo: "360/360fito4.png" }
+];
+
+let visor = null;
+let modoActual = "tactil";
+let panoramaActual = null;
+let indicePanoramaActual = 0;
+let permisoOrientacionConcedido = false;
+let usandoPantallaCompletaAlternativa = false;
+
+const modal360 = document.getElementById("visor360");
+const estado360 = document.getElementById("estado360");
+const botonTactil = document.getElementById("modoTactil");
+const botonMovimiento = document.getElementById("modoMovimiento");
+const botonZoomMas = document.getElementById("zoomMas");
+const botonZoomMenos = document.getElementById("zoomMenos");
+const botonPantallaCompleta = document.getElementById("pantallaCompleta");
+const indicadorPanorama = document.getElementById("indicadorPanorama");
+
+/* ==========================================
+   CONFIGURACIÓN DE ESCENAS PANNELLUM
+========================================== */
+
+function obtenerEscenas() {
+    const escenas = {};
+
+    panoramas.forEach(function (foto) {
+        escenas[foto.id] = {
+            type: "equirectangular",
+            panorama: foto.archivo,
+            yaw: 0,
+            pitch: 0,
+            hfov: 100
+        };
+    });
+
+    return escenas;
+}
+
+/* Actualiza el número pequeño que aparece sobre la imagen. */
+function actualizarIndicador() {
+    indicadorPanorama.textContent =
+        (indicePanoramaActual + 1) + "/" + panoramas.length;
+}
+
+/* ==========================================
+   CAMBIAR ENTRE MODOS
+========================================== */
+
+function actualizarModo(modo) {
+    modoActual = modo;
+
+    botonTactil.classList.toggle("activo", modo === "tactil");
+    botonMovimiento.classList.toggle("activo", modo === "movimiento");
+
+    modal360.classList.toggle(
+        "modo-movimiento",
+        modo === "movimiento"
+    );
+}
+
+/* ==========================================
+   ABRIR EL VISOR 360°
+========================================== */
+
+function abrirTour(imagen360) {
+    if (!panoramas.length) {
+        estado360.textContent = "No hay fotografías 360 configuradas.";
+        return;
+    }
+
+    const indiceEncontrado = panoramas.findIndex(function (foto) {
+        return foto.archivo === imagen360;
+    });
+
+    indicePanoramaActual = indiceEncontrado >= 0 ? indiceEncontrado : 0;
+    panoramaActual = panoramas[indicePanoramaActual].archivo;
+
+    modal360.classList.add("abierto");
+    modal360.classList.remove("modo-pantalla-completa");
+    modal360.setAttribute("aria-hidden", "false");
+
+    document.body.style.overflow = "hidden";
+
+    actualizarModo("tactil");
+    actualizarIndicador();
+
+    estado360.textContent = "Arrastrá el dedo para mirar alrededor.";
+
+    if (visor) {
+        visor.destroy();
+        visor = null;
+    }
+
+    visor = pannellum.viewer("panorama", {
+        default: {
+            firstScene: panoramas[indicePanoramaActual].id,
+            sceneFadeDuration: 500,
+            autoLoad: true,
+            autoRotate: 0,
+            showZoomCtrl: false,
+            showFullscreenCtrl: false,
+            compass: false,
+            draggable: true,
+            mouseZoom: true,
+            keyboardZoom: false,
+            hfov: 110,
+            minHfov: 40,
+            maxHfov: 120,
+            pitch: 0,
+            yaw: 0
+        },
+        scenes: obtenerEscenas()
+    });
+
+    visor.on("load", function () {
+        if (visor) {
+            visor.resize();
+        }
+    });
+
+    visor.on("error", function (error) {
+        console.error("Error al cargar el panorama:", error);
+
+        estado360.textContent =
+            "No se pudo cargar la imagen 360°. Revisá la ruta de la foto.";
+    });
+
+    setTimeout(function () {
+        if (visor && modal360.classList.contains("abierto")) {
+            visor.resize();
+        }
+    }, 200);
+}
+
+/* ==========================================
+   CONEXIÓN ENTRE TODAS LAS FOTOS
+========================================== */
+
+/*
+ * dirección -1: va a la foto anterior.
+ * dirección  1: va a la foto siguiente.
+ *
+ * El módulo hace que el recorrido sea circular:
+ * con 4 fotos, desde la 1 se puede ir a la 2 o a la 4.
+ * con 2 fotos, ambas flechas llevan a la otra fotografía.
+ */
+
+function cambiarPanorama(direccion) {
+    if (!visor || panoramas.length < 2) {
+        return;
+    }
+
+    indicePanoramaActual =
+        (indicePanoramaActual + direccion + panoramas.length)
+        % panoramas.length;
+
+    panoramaActual = panoramas[indicePanoramaActual].archivo;
+
+    actualizarIndicador();
+
+    visor.loadScene(panoramas[indicePanoramaActual].id);
+
+    estado360.textContent =
+        "Panorama " + (indicePanoramaActual + 1) +
+        " de " + panoramas.length +
+        ". Arrastrá para mirar alrededor.";
+}
+
+/* ==========================================
+   CERRAR EL VISOR
+========================================== */
+
+async function cerrarTour() {
+    if (visor) {
+        try {
+            visor.stopOrientation();
+        } catch (error) {
+            console.warn("No había orientación activa.", error);
+        }
+    }
+
+    try {
+        if (
+            document.fullscreenElement ||
+            document.webkitFullscreenElement
+        ) {
+            if (document.exitFullscreen) {
+                await document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) {
+                document.webkitExitFullscreen();
+            }
+        }
+    } catch (error) {
+        console.warn("No se pudo salir de pantalla completa.", error);
+    }
+
+    modal360.classList.remove(
+        "abierto",
+        "modo-movimiento",
+        "modo-pantalla-completa"
+    );
+
+    modal360.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+
+    usandoPantallaCompletaAlternativa = false;
+
+    if (visor) {
+        visor.destroy();
+        visor = null;
+    }
+
+    actualizarModo("tactil");
+}
+
+/* ==========================================
+   MODO TÁCTIL
+========================================== */
+
+function activarTactil() {
+    if (visor) {
+        try {
+            visor.stopOrientation();
+        } catch (error) {
+            console.warn("No se pudo detener la orientación.", error);
+        }
+    }
+
+    actualizarModo("tactil");
+
+    estado360.textContent =
+        "Arrastrá el dedo para mirar alrededor.";
+}
+
+botonTactil.addEventListener("click", activarTactil);
+
+/* ==========================================
+   MODO MOVIMIENTO DEL CELULAR
+========================================== */
+
+async function activarMovimiento() {
+    if (!visor) {
+        estado360.textContent = "Primero abrí el recorrido 360°.";
+        return;
+    }
+
+    if (!("DeviceOrientationEvent" in window)) {
+        estado360.textContent =
+            "Tu dispositivo no admite el sensor de orientación. Usá la vista táctil.";
+        return;
+    }
+
+    try {
+        if (
+            typeof DeviceOrientationEvent.requestPermission === "function"
+        ) {
+            const permiso =
+                await DeviceOrientationEvent.requestPermission();
+
+            if (permiso !== "granted") {
+                estado360.textContent =
+                    "No se concedió el permiso para usar el movimiento.";
+                return;
+            }
+        }
+
+        permisoOrientacionConcedido = true;
+
+        visor.stopOrientation();
+
+        actualizarModo("movimiento");
+        visor.startOrientation();
+
+        estado360.textContent =
+            "Movimiento activado. Girá e incliná el celular para explorar.";
+
+    } catch (error) {
+        console.error("Error al activar el movimiento:", error);
+
+        activarTactil();
+
+        estado360.textContent =
+            "No se pudo activar el sensor. Probá desde HTTPS y revisá los permisos.";
+    }
+}
+
+botonMovimiento.addEventListener("click", activarMovimiento);
+
+/* ==========================================
+   ZOOM
+========================================== */
+
+botonZoomMas.addEventListener("click", function () {
+    if (visor) {
+        visor.setHfov(Math.max(40, visor.getHfov() - 10));
+    }
+});
+
+botonZoomMenos.addEventListener("click", function () {
+    if (visor) {
+        visor.setHfov(Math.min(120, visor.getHfov() + 10));
+    }
+});
+
+/* ==========================================
+   PANTALLA COMPLETA
+========================================== */
+
+botonPantallaCompleta.addEventListener("click", async function () {
+    const elemento = modal360;
+
+    const pantallaCompletaActiva =
+        document.fullscreenElement ||
+        document.webkitFullscreenElement;
+
+    if (
+        usandoPantallaCompletaAlternativa &&
+        !pantallaCompletaActiva
+    ) {
+        elemento.classList.remove("modo-pantalla-completa");
+        usandoPantallaCompletaAlternativa = false;
+
+        if (visor) {
+            setTimeout(function () {
+                visor.resize();
+            }, 150);
+        }
+
+        return;
+    }
+
+    if (pantallaCompletaActiva) {
+        try {
+            if (document.exitFullscreen) {
+                await document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) {
+                document.webkitExitFullscreen();
+            }
+        } catch (error) {
+            console.error("No se pudo salir de pantalla completa:", error);
+        }
+
+        return;
+    }
+
+    try {
+        if (elemento.requestFullscreen) {
+            await elemento.requestFullscreen();
+        } else if (elemento.webkitRequestFullscreen) {
+            await elemento.webkitRequestFullscreen();
+        } else {
+            elemento.classList.add("modo-pantalla-completa");
+            usandoPantallaCompletaAlternativa = true;
+        }
+    } catch (error) {
+        console.warn(
+            "Pantalla completa nativa no disponible; usando alternativa CSS.",
+            error
+        );
+
+        elemento.classList.add("modo-pantalla-completa");
+        usandoPantallaCompletaAlternativa = true;
+    }
+
+    setTimeout(function () {
+        if (visor) {
+            visor.resize();
+        }
+    }, 200);
+});
+
+/* Ajustar el visor al cambiar el tamaño de pantalla. */
+
+function reajustarVisor() {
+    if (visor) {
+        setTimeout(function () {
+            visor.resize();
+        }, 150);
+    }
+}
+
+document.addEventListener("fullscreenchange", reajustarVisor);
+document.addEventListener("webkitfullscreenchange", reajustarVisor);
+window.addEventListener("resize", reajustarVisor);
+
+/* ==========================================
+   CERRAR CON ESCAPE
+========================================== */
+
+document.addEventListener("keydown", function (evento) {
+    if (
+        evento.key === "Escape" &&
+        modal360.classList.contains("abierto")
+    ) {
+        if (
+            document.fullscreenElement ||
+            document.webkitFullscreenElement
+        ) {
+            return;
+        }
+
+        cerrarTour();
+    }
+});
+
+/* ==========================================
+   CARRUSEL DE IMÁGENES DE LAS ESPECIES
+========================================== */
+
+document.querySelectorAll(".card-img").forEach(function (card) {
+    const images = (card.dataset.images || "")
+        .split(",")
+        .map(function (img) {
+            return img.trim();
+        })
+        .filter(Boolean);
+
+    if (!images.length) return;
+
+    if (images.length === 1) {
+        card.style.backgroundImage = `url('${images[0]}')`;
+        return;
+    }
+
+    let currentImage = 0;
+
+    card.style.backgroundImage = `url('${images[0]}')`;
+
+    setInterval(function () {
+        card.classList.add("blink");
+
+        setTimeout(function () {
+            currentImage = (currentImage + 1) % images.length;
+
+            card.style.backgroundImage =
+                `url('${images[currentImage]}')`;
+
+            card.classList.remove("blink");
+        }, 700);
+    }, 5000);
+});
+</script>
+</body>
+</html>

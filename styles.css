@@ -1,6 +1,5 @@
-/* ==========================================================================
-   1. ESTILOS GENERALES Y RESETS (Compartidos por ambas pantallas)
-   ========================================================================== */
+/* 1. ESTILOS GENERALES Y RESETS */
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -10,38 +9,35 @@
 }
 
 body {
-    background-color: #121e16; /* Entorno externo oscuro premium */
+    background-color: #121e16;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
 }
 
-/* ==========================================================================
-   2. PANTALLA PRINCIPAL: SECTORES (9 Opciones en Vertical)
-   ========================================================================== */
+/* 2. PANTALLA PRINCIPAL: SECTORES */
 
-/* Contenedor del Smartphone de Sectores */
 .phone-container {
     width: 100%;
     max-width: 430px;
     height: 92vh;
     max-height: 900px;
-    background-color: #e5ede8; /* Fondo verde pálido orgánico */
+    background-color: #e5ede8;
     border-radius: 40px;
     overflow: hidden;
     position: relative;
     box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
     display: flex;
     flex-direction: column;
+    isolation: isolate;
 }
 
-/* Encabezado Fijo Superior con Textura */
 .app-header {
     background-image: url('sectores_generales/general.jpg');
     background-size: cover;
     background-position: center;
-    padding: 30px 16px 20px 16px;
+    padding: 35px 16px 12px 16px;
     position: relative;
     text-align: center;
     color: #ffffff;
@@ -49,24 +45,33 @@ body {
     border-bottom-right-radius: 28px;
     box-shadow: 0 6px 20px rgba(21, 56, 38, 0.15);
     z-index: 10;
+    overflow: hidden;
 }
 
 .app-header::before {
     content: '';
     position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: linear-gradient(135deg, rgba(27, 50, 34, 0.9) 0%, rgba(48, 87, 59, 0.78) 100%);
+    inset: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(27, 50, 34, 0.55) 0%,
+        rgba(48, 87, 59, 0.45) 100%
+    );
+    border-bottom-left-radius: 28px;
+    border-bottom-right-radius: 28px;
     z-index: 1;
 }
 
-.logo-icon, .app-header h1, .app-header h2 {
+.logo-icon,
+.app-header h1,
+.app-header h2 {
     position: relative;
     z-index: 2;
 }
 
 .logo-icon {
     font-size: 1.4rem;
-    color: #cdb387; /* Detalle dorado/bellota */
+    color: #cdb387;
     margin-bottom: 6px;
 }
 
@@ -85,25 +90,27 @@ body {
     margin-top: 4px;
 }
 
-/* Área de desplazamiento de tarjetas */
 .sectors-scroll-area {
     flex: 1;
     overflow-y: scroll;
-    padding: 20px 16px 100px 16px; /* Espacio para que la barra inferior no tape el contenido */
+    padding: 20px 16px 100px;
 }
-.sectors-scroll-area::-webkit-scrollbar { display: none; }
 
-/* Contenedor en Lista de Una Sola Columna Vertical */
+.sectors-scroll-area::-webkit-scrollbar {
+    display: none;
+}
+
 .sectors-vertical-list {
     display: flex;
     flex-direction: column;
-    gap: 16px; /* Separación limpia entre tarjetas */
+    gap: 16px;
 }
 
-/* Tarjetas individuales de los Sectores */
+/* Tarjetas de sectores */
+
 .sector-card {
     position: relative;
-    height: 140px; /* Altura rectangular premium */
+    height: 140px;
     border-radius: 24px;
     overflow: hidden;
     background-size: cover;
@@ -112,29 +119,31 @@ body {
     border: 1px solid rgba(21, 56, 38, 0.04);
 }
 
-/* Sombreado interno para contraste del texto */
 .card-overlay {
     position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: linear-gradient(to top, rgba(18, 30, 22, 0.8) 0%, rgba(0,0,0,0.05) 80%);
+    inset: 0;
+    background: linear-gradient(
+        to top,
+        rgba(18, 30, 22, 0.8) 0%,
+        rgba(0, 0, 0, 0.05) 80%
+    );
     padding: 16px 20px;
     display: flex;
-    justify-content: space-between; /* Texto a la izquierda, botón a la derecha */
-    align-items: center; /* Alineados perfectamente al centro vertical */
+    justify-content: space-between;
+    align-items: center;
 }
 
 .card-overlay h3 {
     color: #ffffff;
     font-size: 1.1rem;
     font-weight: 600;
-    max-width: 60%; /* Evita que el texto largo se choque con el botón */
+    max-width: 60%;
     text-align: left;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* Botón Ovalado de Alta Gama */
 .btn-ingresar {
-    background-color: #ded9cd; /* Tono arena matte de la interfaz anterior */
+    background-color: #ded9cd;
     color: #2a261f;
     border: none;
     padding: 10px 22px;
@@ -142,9 +151,11 @@ body {
     font-size: 0.8rem;
     font-weight: 700;
     cursor: pointer;
-    box-shadow: inset 0 -2px 0px rgba(0,0,0,0.1), 0 4px 10px rgba(0,0,0,0.15);
+    box-shadow:
+        inset 0 -2px 0 rgba(0, 0, 0, 0.1),
+        0 4px 10px rgba(0, 0, 0, 0.15);
     transition: transform 0.1s;
-    white-space: nowrap; /* Evita que la palabra se parta */
+    white-space: nowrap;
 }
 
 .btn-ingresar:active {
@@ -152,10 +163,13 @@ body {
     background-color: #cbd5cc;
 }
 
-/* Barra de navegación inferior Menú Sectores */
+/* Navegación inferior */
+
 .bottom-nav {
     position: absolute;
-    bottom: 0; left: 0; right: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
     height: 75px;
     z-index: 90;
     display: flex;
@@ -165,7 +179,7 @@ body {
 
 .bottom-nav .nav-blur-bg {
     position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
+    inset: 0;
     background: rgba(35, 59, 44, 0.88);
     backdrop-filter: blur(12px);
     border-top-left-radius: 24px;
@@ -190,21 +204,27 @@ body {
     color: #a4bfae;
     font-size: 1.15rem;
 }
-.bottom-nav .nav-item span { font-size: 0.58rem; font-weight: 700; margin-top: 2px; }
-.bottom-nav .nav-item.active { color: #e5ede8; }
 
+.bottom-nav .nav-item span {
+    font-size: 0.58rem;
+    font-weight: 700;
+    margin-top: 2px;
+}
+
+.bottom-nav .nav-item.active {
+    color: #e5ede8;
+}
 
 /* ==========================================================================
-   3. PANTALLA DETALLE: AVENIDA DE LOS ROBLES (Carrusel e Info)
+   3. PANTALLA DETALLE: AVENIDA DE LOS ROBLES
    ========================================================================== */
 
-/* Teléfono Inteligente Encapsulado de Robles */
 .app-container {
     width: 100%;
     max-width: 430px;
     height: 92vh;
     max-height: 900px;
-    background-color: #e5ede8; /* Fondo verde pálido orgánico */
+    background-color: #e5ede8;
     border-radius: 40px;
     overflow: hidden;
     position: relative;
@@ -213,7 +233,8 @@ body {
     flex-direction: column;
 }
 
-/* Botón de Regreso Flotante */
+/* Botón de regreso */
+
 .floating-back-btn {
     position: absolute;
     top: 24px;
@@ -229,16 +250,17 @@ body {
     color: #1e3a27;
     text-decoration: none;
     z-index: 99;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     font-size: 1rem;
 }
 
-/* Header con textura de corteza */
+/* Encabezado */
+
 .hero-banner {
     background-image: url('sectores_generales/general.jpg');
     background-size: cover;
     background-position: center;
-    padding: 35px 24px 24px 24px;
+    padding: 35px 24px 24px;
     position: relative;
     color: #ffffff;
     border-bottom-left-radius: 28px;
@@ -248,8 +270,12 @@ body {
 .hero-banner::before {
     content: '';
     position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: linear-gradient(135deg, rgba(27, 50, 34, 0.85) 0%, rgba(48, 87, 59, 0.7) 100%);
+    inset: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(27, 50, 34, 0.85) 0%,
+        rgba(48, 87, 59, 0.7) 100%
+    );
     z-index: 1;
 }
 
@@ -274,10 +300,10 @@ body {
     font-weight: 700;
 }
 
-.scientific-name {
+.informacion-name {
     position: relative;
     z-index: 2;
-    font-size: 0.9rem;
+    font-size: 1.0rem;
     color: #d8c29d;
     font-style: italic;
 }
@@ -297,21 +323,24 @@ body {
     align-items: center;
     color: #23432d;
     font-size: 1.2rem;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
-/* Área de Contenido Scrollable Robles */
+/* Contenido */
+
 .app-body {
     flex: 1;
     overflow-y: scroll;
-    padding: 32px 0px 100px 0px;
+    padding: 32px 0 100px;
     display: flex;
     flex-direction: column;
     gap: 24px;
 }
-.app-body::-webkit-scrollbar { display: none; }
 
-/* Contenedor e iframe 360° */
+.app-body::-webkit-scrollbar {
+    display: none;
+}
+
 .card-info {
     background-color: #ffffff;
     border-radius: 24px;
@@ -326,12 +355,30 @@ body {
     margin-bottom: 12px;
 }
 
+/* Vista previa del panorama */
+
 .panorama-container {
+    position: relative;
     width: 100%;
-    height: 160px;
+    height: 180px;
     background-color: #f4f7f5;
+    background-image: url('360prueba.jpg');
+    background-size: cover;
+    background-position: center;
     border-radius: 16px;
     overflow: hidden;
+    cursor: pointer;
+}
+
+.panorama-container::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        180deg,
+        rgba(15, 35, 23, 0.05),
+        rgba(15, 35, 23, 0.55)
+    );
 }
 
 .panorama-placeholder {
@@ -353,13 +400,42 @@ body {
     color: #cdb387;
 }
 
-/* --- SECCIÓN DE CARRUSEL HORIZONTAL --- */
+.panorama-container .panorama-placeholder {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    min-height: 0;
+    background: transparent;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.panorama-container .panorama-placeholder i {
+    color: white !important;
+    font-size: 2rem;
+}
+
+.panorama-container .panorama-placeholder p {
+    color: white !important;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-shadow: 0 2px 5px #000;
+}
+
+/* Carrusel */
+
 .carousel-section h3 {
     font-size: 1.1rem;
     color: #1a3b25;
     margin-left: 20px;
-    margin-bottom: 12px;
+    margin-bottom: 0;
+    margin-top: 0;
 }
+
 .carousel-section h3 span {
     font-size: 0.75rem;
     color: #7a9382;
@@ -370,14 +446,20 @@ body {
     display: flex;
     gap: 16px;
     overflow-x: auto;
-    padding: 4px 20px 16px 20px;
+    padding: 4px 20px 16px;
     scroll-snap-type: x mandatory;
+    margin: 20px;
+    margin-bottom: 5px;
+    margin-top: 5px;
 }
-.species-carousel::-webkit-scrollbar { display: none; }
+
+.species-carousel::-webkit-scrollbar {
+    display: none;
+}
 
 .species-card {
-    min-width: 150px;
-    max-width: 150px;
+    min-width: 195px;
+    max-width: 195px;
     background-color: #ffffff;
     border-radius: 20px;
     overflow: hidden;
@@ -390,85 +472,106 @@ body {
 
 .card-img {
     width: 100%;
-    height: 110px;
+    height: 145px;
     background-size: cover;
     background-position: center;
+    overflow: hidden;
+    transition: opacity 0.3s ease-in-out;
+    opacity: 1;
+}
+
+.card-img.blink {
+    opacity: 0;
 }
 
 .card-detail {
-    padding: 12px 10px;
+    padding: 13px 11px;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 4px;
+    gap: 5px;
 }
 
 .card-detail h4 {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
+    line-height: 1.2;
     color: #1a3b25;
     font-weight: 700;
 }
 
 .card-detail .sci-name {
-    font-size: 0.75rem;
+    font-size: 0.78rem;
     font-style: italic;
     color: #7a9382;
+    line-height: 1.25;
 }
 
 .btn-ficha {
-    margin-top: 6px;
-    font-size: 0.7rem;
+    margin-top: 7px;
+    font-size: 0.72rem;
     color: #ffffff;
     background-color: #3b5f47;
     text-decoration: none;
-    padding: 4px 12px;
+    padding: 5px 13px;
     border-radius: 12px;
     font-weight: 600;
 }
 
-/* Grid de Módulos de Madera/Métricas */
+/* Métricas */
+
 .metrics-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 12px;
-    margin: 0 20px;
+    margin: 20px;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 .metric-box {
     background: #ded9cd;
     border-radius: 18px;
-    padding: 12px 6px;
+    padding: 16px 6px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    box-shadow: inset 0 -3px 0px rgba(0,0,0,0.1), 0 4px 10px rgba(0,0,0,0.04);
+    box-shadow:
+        inset 0 -3px 0 rgba(0, 0, 0, 0.1),
+        0 4px 10px rgba(0, 0, 0, 0.04);
+    margin: 0;
 }
 
 .metric-label {
-    font-size: 0.62rem;
+    font-size: 0.68rem;
     font-weight: 800;
     color: #5d5649;
     margin-bottom: 6px;
 }
 
 .metric-icon-wrapper {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     color: #433d32;
     margin-bottom: 4px;
 }
 
 .metric-value {
-    font-size: 0.85rem;
+    font-size: 0.95rem;
     font-weight: 700;
     color: #2a261f;
 }
-.status-low { color: #2d5a27; }
 
-/* Barra Inferior de Navegación Robles */
+.status-low {
+    color: #2d5a27;
+}
+
+/* Navegación inferior */
+
 .app-bottom-nav {
     position: absolute;
-    bottom: 0; left: 0; right: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
     height: 75px;
     z-index: 90;
     display: flex;
@@ -478,7 +581,7 @@ body {
 
 .app-bottom-nav .nav-blur-bg {
     position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
+    inset: 0;
     background: rgba(35, 59, 44, 0.85);
     backdrop-filter: blur(12px);
     border-top-left-radius: 24px;
@@ -503,13 +606,21 @@ body {
     color: #a4bfae;
     font-size: 1.15rem;
 }
-.nav-link span { font-size: 0.58rem; font-weight: 700; margin-top: 2px; }
-.nav-link.active { color: #e5ede8; }
 
+.nav-link span {
+    font-size: 0.58rem;
+    font-weight: 700;
+    margin-top: 2px;
+}
+
+.nav-link.active {
+    color: #e5ede8;
+}
 
 /* ==========================================================================
-   4. ELEMENTOS COMPARTIDOS ENTRE AMBAS BARRAS INFERIORES
+   4. ELEMENTOS COMPARTIDOS
    ========================================================================== */
+
 .center-compass {
     width: 68px;
     height: 68px;
@@ -519,7 +630,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 -5px 15px rgba(0,0,0,0.15);
+    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.15);
 }
 
 .compass-inner {
@@ -534,136 +645,654 @@ body {
     font-size: 1.3rem;
 }
 
-/* Estilos específicos e indispensables para el visor flotante 360 de Pannellum */
-        #visor360 {
-            display: none;
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.85);
-            z-index: 999;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-        #panorama {
-            width: 100%;
-            height: 70%;
-            border-radius: 20px;
-            overflow: hidden;
-        }
-        #cerrar {
-            position: absolute;
-            top: 24px;
-            right: 24px;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-            z-index: 1000;
-            background: rgba(0,0,0,0.5);
-            width: 40px;
-            height: 40px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 50%;
-        }
+/* Icono animado del encabezado */
 
-        .card-info img {
-    width: 100%;          /* Ocupa el 100% del ancho de la tarjeta */
-    height: auto;         /* Ajusta la altura automáticamente para no deformar */
-    display: block;       /* Elimina espacios en blanco extra debajo de la imagen */
-    border-radius: 12px;  /* Opcional: le da esquinas redondeadas para que combine con el diseño de la app */
-    margin-top: 10px;     /* Opcional: separa el mapa del título "Mapa" */
+.logo-icon {
+    width: 60px !important;
+    height: 60px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    overflow: hidden !important;
+    position: relative !important;
+    background: transparent !important;
 }
 
-/* Contenedor del mapa para evitar que se rompa el diseño de la app al agrandarse */
-.mapa-container {
-    width: 100%;
-    overflow: hidden; /* O usa 'auto' si prefieres que aparezcan barras de scroll al hacer zoom */
-    border-radius: 12px;
-    margin-top: 10px;
-    background-color: #f5f5f5;
+.logo-icon > #sakuraCanvas {
+    position: absolute !important;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 60px !important;
+    height: 60px !important;
+    max-width: 60px !important;
+    max-height: 60px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    pointer-events: none !important;
+    display: block !important;
 }
 
-/* Estado normal de la imagen */
-.mapa-zoom {
-    width: 100%;
-    height: auto;
-    display: block;
-    transition: transform 0.3s ease; /* Animación suave del zoom */
-    cursor: zoom-in;
-}
+/* ==========================================================================
+   5. VISOR 360° - PANNELLUM
+   ========================================================================== */
 
-/* Estado cuando se activa el Zoom (al tocar) */
-.mapa-zoom.active {
-    transform: scale(1.8); /* Magnitud del zoom (1.8 veces su tamaño). Puedes subirlo a 2.0 si quieres más zoom */
-    cursor: zoom-out;
-}
-/* Contenedor principal de la vista previa 360° */
-.panorama-placeholder {
-    /* Combinación de degradado oscuro + imagen de fondo */
-    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)), url('faini.jpg.jpg');
-    background-size: cover;
-    background-position: center;
-    
-    /* Estilos de caja recomendados para que luzca como tarjeta en la app */
-    display: flex;
-    flex-direction: column;
+#visor360 {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    background: rgba(9, 20, 13, 0.96);
     justify-content: center;
     align-items: center;
-    text-align: center;
-    padding: 20px;
-    border-radius: 12px;
-    min-height: 180px; /* Altura mínima base para que luzca bien el fondo */
+    padding: 16px;
+    padding-top: max(16px, env(safe-area-inset-top));
+    padding-bottom: max(16px, env(safe-area-inset-bottom));
 }
 
-/* Ícono central */
-.panorama-placeholder .icon-360 {
-    color: #ffffff;
-    font-size: 1.5rem; /* Ajusta el tamaño del ícono si lo deseas */
-    margin-bottom: 8px;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+#visor360.abierto {
+    display: flex;
 }
 
-/* Título (Lago Botánico) */
-.panorama-placeholder .panorama-title {
-    color: #ffffff;
-    font-weight: 700;
-    font-size: 1.1rem;
-    margin-bottom: 4px;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+#visor360 .visor-panel {
+    width: 100%;
+    max-width: 650px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
 }
 
-/* Descripción inferior */
-.panorama-placeholder .panorama-description {
+#visor360 .visor-titulo {
     color: #e5ede8;
-    font-size: 0.75rem;
-    margin: 0;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-    max-width: 85%; /* Evita que el texto toque los bordes laterales */
+    font-size: 1rem;
+    font-weight: 700;
+    text-align: center;
+    padding: 8px 45px;
 }
-#botonMovimiento {
-    position: absolute;
-    z-index: 9999;
 
-    bottom: 25px;
+#visor360 .visor-titulo i {
+    color: #cdb387;
+    margin-right: 7px;
+}
+
+/* Panorama */
+
+#visor360 .panorama-visor-wrap {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+#visor360 #panorama {
+    position: relative;
+    width: 100%;
+    height: min(62vh, 560px);
+    min-height: 260px;
+    max-height: 600px;
+    border-radius: 18px;
+    overflow: hidden;
+    background: #19291e;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
+    touch-action: pan-y;
+}
+
+#visor360 #panorama .pnlm-panorama-info,
+#visor360 #panorama .pnlm-scene-name {
+    display: none !important;
+}
+
+#visor360 .panorama-visor-wrap .pnlm-container {
+    z-index: 1;
+}
+
+/* Cerrar visor */
+
+#visor360 #cerrar {
+    position: absolute;
+    top: max(16px, env(safe-area-inset-top));
+    right: 16px;
+    width: 42px;
+    height: 42px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(4px);
+    color: white;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 100001;
+}
+
+/* Flechas de recorrido */
+
+#visor360 .flecha-recorrido {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 50%;
+    background: rgba(9, 20, 13, 0.65);
+    color: #ffffff;
+    font-size: 1rem;
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+#visor360 .flecha-recorrido.izquierda {
+    left: 10px;
+}
+
+#visor360 .flecha-recorrido.derecha {
+    right: 10px;
+}
+
+#visor360 .flecha-recorrido:active {
+    transform: translateY(-50%) scale(0.94);
+}
+
+/* Indicador de panorama */
+
+#visor360 #indicadorPanorama {
+    position: absolute;
+    bottom: 10px;
     left: 50%;
     transform: translateX(-50%);
-
-    border: none;
-    border-radius: 30px;
-
-    padding: 14px 22px;
-
-    background: rgba(0, 0, 0, 0.75);
-    color: white;
-
-    font-size: 15px;
-    font-weight: bold;
-
-    cursor: pointer;
+    z-index: 10;
+    padding: 5px 12px;
+    border-radius: 20px;
+    background: rgba(9, 20, 13, 0.75);
+    color: #ffffff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    line-height: 1.2;
+    pointer-events: none;
 }
 
-#botonMovimiento.activo {
-    background: rgba(30, 120, 80, 0.9);
+/* ==========================================================================
+   6. CONTROLES 360° - ESTILO UNIFICADO
+   ========================================================================== */
+
+#visor360 .visor-controles {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+    flex-shrink: 0;
+}
+
+/*
+   Los cinco botones comparten el mismo estilo.
+   Los selectores coinciden con el HTML real:
+   .modo-btn y .control-btn son hermanos directos.
+*/
+
+#visor360 .visor-controles > .modo-btn,
+#visor360 .visor-controles > .control-btn {
+    height: 42px;
+    min-height: 42px;
+    min-width: 0;
+    margin: 0;
+    display: inline-flex;
+    flex: 0 1 auto;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    padding: 8px 10px;
+    border: 1px solid rgba(229, 237, 232, 0.2);
+    border-radius: 12px;
+    background: #263f2f;
+    color: #e5ede8;
+    font-family: inherit;
+    font-size: 0.78rem;
+    font-weight: 600;
+    line-height: 1;
+    white-space: nowrap;
+    box-shadow: none;
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+    transition: background 0.2s, color 0.2s, transform 0.15s;
+}
+
+/* Botones que contienen únicamente un icono */
+
+#visor360 .visor-controles > .control-btn {
+    width: 42px;
+    min-width: 42px;
+    max-width: 42px;
+    height: 42px;
+    min-height: 42px;
+    flex: 0 0 42px;
+    padding: 0;
+    font-size: 0.95rem;
+}
+
+/* Centrado de los iconos */
+
+#visor360 .visor-controles > .control-btn i {
+    display: block;
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+    text-align: center;
+}
+
+/* Modo seleccionado */
+
+#visor360 .visor-controles > .modo-btn.activo {
+    background: #cdb387;
+    border-color: #cdb387;
+    color: #263326;
+}
+
+/* Hover de todos los controles */
+
+#visor360 .visor-controles > .modo-btn:hover,
+#visor360 .visor-controles > .control-btn:hover {
+    background-color: #314d39;
+}
+
+#visor360 .visor-controles > .modo-btn.activo:hover {
+    background-color: #cdb387;
+}
+
+/* Efecto al presionar */
+
+#visor360 .visor-controles > .modo-btn:active,
+#visor360 .visor-controles > .control-btn:active {
+    transform: scale(0.96);
+}
+
+/* Foco accesible con teclado */
+
+#visor360 .visor-controles > .modo-btn:focus-visible,
+#visor360 .visor-controles > .control-btn:focus-visible {
+    outline: 2px solid #cdb387;
+    outline-offset: 2px;
+}
+
+/* Estado del visor */
+
+#visor360 #estado360 {
+    width: 100%;
+    max-width: 650px;
+    min-height: 20px;
+    margin-top: 0;
+    padding: 0 8px;
+    color: #cbdad0;
+    font-size: 0.78rem;
+    line-height: 1.5;
+    text-align: center;
+}
+
+/* ==========================================================================
+   7. ADAPTACIÓN A CELULARES PEQUEÑOS
+   ========================================================================== */
+
+@media (max-width: 380px) {
+    #visor360 {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    #visor360 #panorama {
+        height: 55vh;
+        min-height: 230px;
+    }
+
+    #visor360 .visor-controles {
+        gap: 4px;
+    }
+
+    #visor360 .visor-controles > .modo-btn {
+        padding: 7px 5px;
+        gap: 4px;
+        font-size: 0.68rem;
+    }
+
+    #visor360 .visor-controles > .control-btn {
+        width: 36px;
+        min-width: 36px;
+        max-width: 36px;
+        flex-basis: 36px;
+    }
+}
+
+@media (max-width: 350px) {
+    #visor360 .visor-controles {
+        gap: 3px;
+    }
+
+    #visor360 .visor-controles > .modo-btn {
+        padding: 6px 3px;
+        gap: 3px;
+        font-size: 0.62rem;
+    }
+
+    #visor360 .visor-controles > .control-btn {
+        width: 33px;
+        min-width: 33px;
+        max-width: 33px;
+        flex-basis: 33px;
+    }
+}
+
+/* ==========================================================================
+   8. VISOR 360° - PANTALLA COMPLETA
+   ========================================================================== */
+
+/* Pantalla completa nativa */
+
+#visor360:fullscreen,
+#visor360:-webkit-full-screen {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    padding:
+        max(12px, env(safe-area-inset-top))
+        12px
+        max(12px, env(safe-area-inset-bottom));
+    border-radius: 0;
+    background: #09140d;
+    overflow: auto;
+}
+
+#visor360:fullscreen .visor-panel,
+#visor360:-webkit-full-screen .visor-panel {
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    max-height: none;
+    justify-content: center;
+    gap: 12px;
+}
+
+#visor360:fullscreen .panorama-visor-wrap,
+#visor360:-webkit-full-screen .panorama-visor-wrap {
+    width: 100%;
+    flex: 1;
+    min-height: 0;
+    position: relative;
+}
+
+#visor360:fullscreen .panorama-visor-wrap #panorama,
+#visor360:-webkit-full-screen .panorama-visor-wrap #panorama {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    max-height: none;
+    flex: 1;
+    border-radius: 12px;
+}
+
+#visor360:fullscreen #cerrar,
+#visor360:-webkit-full-screen #cerrar {
+    position: fixed;
+    top: max(12px, env(safe-area-inset-top));
+    right: 12px;
+}
+
+/* Pantalla completa simulada para dispositivos incompatibles */
+
+#visor360.modo-pantalla-completa {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    max-width: none;
+    max-height: none;
+    padding:
+        max(12px, env(safe-area-inset-top))
+        12px
+        max(12px, env(safe-area-inset-bottom));
+    border-radius: 0;
+    overflow: auto;
+}
+
+#visor360.modo-pantalla-completa .visor-panel {
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    min-height: 0;
+    justify-content: center;
+}
+
+#visor360.modo-pantalla-completa .panorama-visor-wrap {
+    width: 100%;
+    flex: 1;
+    min-height: 0;
+    position: relative;
+}
+
+#visor360.modo-pantalla-completa .panorama-visor-wrap #panorama {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    max-height: none;
+    flex: 1;
+}
+
+#visor360.modo-pantalla-completa .visor-titulo {
+    padding-right: 48px;
+}
+
+/* Mantener controles y estado visibles */
+
+#visor360:fullscreen .visor-controles,
+#visor360:-webkit-full-screen .visor-controles,
+#visor360.modo-pantalla-completa .visor-controles,
+#visor360:fullscreen #estado360,
+#visor360:-webkit-full-screen #estado360,
+#visor360.modo-pantalla-completa #estado360,
+#visor360:fullscreen .visor-titulo,
+#visor360:-webkit-full-screen .visor-titulo,
+#visor360.modo-pantalla-completa .visor-titulo {
+    position: relative;
+    z-index: 20;
+    flex-shrink: 0;
+}
+
+/* Orientación horizontal */
+
+@media (orientation: landscape) {
+    #visor360:fullscreen .visor-panel,
+    #visor360:-webkit-full-screen .visor-panel,
+    #visor360.modo-pantalla-completa .visor-panel {
+        max-width: none;
+        height: 100%;
+        min-height: 0;
+    }
+
+    #visor360:fullscreen .panorama-visor-wrap,
+    #visor360:-webkit-full-screen .panorama-visor-wrap,
+    #visor360.modo-pantalla-completa .panorama-visor-wrap {
+        flex: 1;
+        min-height: 0;
+    }
+}
+
+/* En modo movimiento, controlar con el sensor */
+
+#visor360.modo-movimiento #panorama {
+    pointer-events: none;
+}
+
+/* ==========================================================================
+   9. AJUSTES FINALES DEL CONTENEDOR
+   ========================================================================== */
+
+.phone-container {
+    border-radius: 40px;
+    overflow: hidden;
+    isolation: isolate;
+    background-color: #e5ede8;
+}
+
+.app-header {
+    position: relative;
+    overflow: hidden;
+    border-bottom-left-radius: 28px;
+    border-bottom-right-radius: 28px;
+}
+
+/* ==========================================================================
+   10. COMPATIBILIDAD DE FLECHAS Y PANORAMA
+   ========================================================================== */
+
+/* Contenedor del panorama */
+
+.panorama-visor-wrap {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+/* Estilos base del panorama */
+
+#panorama {
+    width: 100%;
+    height: 55vh;
+    min-height: 280px;
+    max-height: 600px;
+    position: relative;
+    overflow: hidden;
+    background: #dfe6df;
+}
+
+/* Flechas dentro de la imagen */
+
+.flecha-recorrido {
+    position: absolute;
+    top: 50%;
+    z-index: 10000;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.85);
+    color: #244b35;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.22);
+    -webkit-tap-highlight-color: transparent;
+}
+
+.flecha-recorrido:active {
+    background: #ffffff;
+    transform: translateY(-50%) scale(0.94);
+}
+
+.flecha-recorrido.izquierda {
+    left: 10px;
+}
+
+.flecha-recorrido.derecha {
+    right: 10px;
+}
+
+/* Indicador de panorama */
+
+#indicadorPanorama {
+    position: absolute;
+    z-index: 10000;
+    bottom: 9px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 3px 7px;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.55);
+    color: #fff;
+    font-size: 10px;
+    line-height: 1.2;
+    pointer-events: none;
+}
+
+/* Mantener las flechas sobre Pannellum */
+
+.panorama-visor-wrap .pnlm-container {
+    z-index: 1;
+}
+
+/* Ajustes de flechas para celulares */
+
+@media (max-width: 380px) {
+    #panorama {
+        height: 48vh;
+        min-height: 250px;
+    }
+
+    .flecha-recorrido {
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
+    }
+
+    .flecha-recorrido.izquierda {
+        left: 7px;
+    }
+
+    .flecha-recorrido.derecha {
+        right: 7px;
+    }
+}
+
+/* Achicar el encabezado del index */
+.app-header {
+    padding: 15px 16px 12px 16px;
+}
+
+/* Achicar el espacio del logo animado */
+.logo-icon {
+    width: 42px !important;
+    height: 42px !important;
+    margin-bottom: 3px !important;
+}
+
+/* Achicar el canvas del logo */
+.logo-icon > #sakuraCanvas {
+    width: 42px !important;
+    height: 42px !important;
+    max-width: 42px !important;
+    max-height: 42px !important;
+}
+
+/* Achicar el título JB */
+.app-header h1 {
+    font-size: 1.3rem;
+}
+
+/* Achicar el subtítulo SECTORES */
+.app-header h2 {
+    font-size: 0.7rem;
+    letter-spacing: 1.5px;
+    margin-top: 2px;
 }
